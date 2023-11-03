@@ -3,17 +3,18 @@ package com.comp3607project;
 import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
-public abstract class User {
+public class User {
     protected int id;
     protected String name;
     protected String email;
     protected String password;
-    private static int idCounter = 0;
+    private static int idCounter = 1;
 
     public User(String name, String email, String password) {
         this.id = idCounter;
         this.name = name;
         this.email = email;
+        // System.out.println(password);
         this.password = encryptPassword(password);
 
         idCounter++;
@@ -100,15 +101,17 @@ public abstract class User {
     }
 
     public void reviewSubmission(AssignmentSubmission submission) {
-        // Code for reviewing submission
+        System.out.println(submission.toString());
     }
 
-    public void changeMark(AssignmentSubmission submission) {
-        // Code for changing submission mark
+    public AssignmentSubmission changeMark(AssignmentSubmission submission, int mark) {
+        submission.setMark(mark);
+
+        return submission;
     }
 
-    public void makeComment(String comment) {
-        // Code to add comment to submission
+    public void makeComment(AssignmentSubmission submission, String comment) {
+        submission.setComment(comment);
     }
 
 }
