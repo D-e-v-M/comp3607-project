@@ -1,5 +1,5 @@
 package com.comp3607project;
 
 public interface PlagiarismChecker {
-    public double measure(AssignmentSubmission s1, AssignmentSubmission s2);
+    public double measure(AssignmentResults s1, AssignmentResults s2);
 }

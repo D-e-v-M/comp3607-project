@@ -5,7 +5,7 @@ public class Main {
         System.out.println("Hello world!");
 
         // Simple testing
-        AssignmentSubmission submission = new AssignmentSubmission(1);
+        AssignmentResults submission = new AssignmentResults(1);
         submission.setMark(79);
         submission.setComment("Decent");
 

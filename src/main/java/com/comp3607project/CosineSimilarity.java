@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class CosineSimilarity implements PlagiarismChecker {
 
-    public double measure(AssignmentSubmission as1, AssignmentSubmission as2) {
+    public double measure(AssignmentResults as1, AssignmentResults as2) {
 
         // Placeholder strings for now
         String s1 = "";

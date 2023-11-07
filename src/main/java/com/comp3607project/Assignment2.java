@@ -10,7 +10,7 @@ public class Assignment2 extends Assignment {
         this.dueDate = LocalDateTime.of(2024, Month.MARCH, 17, 23, 59);
     }
 
-    protected int gradeAssignment(AssignmentSubmission submission) {
+    protected int gradeAssignment(AssignmentResults submission) {
         // Code to grade assignment
 
         return 0;

@@ -17,14 +17,14 @@ public abstract class Assignment {
         idCounter++;
     }
 
-    protected abstract int gradeAssignment(AssignmentSubmission submission);
+    protected abstract int gradeAssignment(AssignmentResults submission);
 
-    public void beginGrading(AssignmentSubmission submission) {
+    public void beginGrading(AssignmentResults submission) {
         Assignment a = chooseAssignmentType(submission);
         a.gradeAssignment(submission);
     }
 
-    public Assignment chooseAssignmentType(AssignmentSubmission submission) {
+    public Assignment chooseAssignmentType(AssignmentResults submission) {
         Assignment a;
 
         switch (submission.getType()) {

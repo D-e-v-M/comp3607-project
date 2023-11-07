@@ -100,18 +100,18 @@ public class User {
         return false;
     }
 
-    public void reviewSubmission(AssignmentSubmission submission) {
+    public void reviewSubmission(AssignmentResults submission) {
         System.out.println(submission.toString());
-        //Further changes must be done to this method
+        // Further changes must be done to this method
     }
 
-    public AssignmentSubmission changeMark(AssignmentSubmission submission, int mark) {
+    public AssignmentResults changeMark(AssignmentResults submission, int mark) {
         submission.setMark(mark);
 
         return submission;
     }
 
-    public void makeComment(AssignmentSubmission submission, String comment) {
+    public void makeComment(AssignmentResults submission, String comment) {
         submission.setComment(comment);
     }
 
