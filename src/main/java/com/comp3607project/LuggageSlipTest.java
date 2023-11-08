@@ -45,6 +45,7 @@ public class LuggageSlipTest{
     public void testLabel()
     {
         assertNotNull(luggageslip.getLabel());
+        assertNotNull(luggageslip2.getLabel());
         assertTrue(luggageslip.getLabel() == "" && luggageslip2.getLabel() == "$105");
     }
 
