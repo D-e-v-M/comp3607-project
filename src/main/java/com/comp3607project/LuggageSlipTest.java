@@ -1,11 +1,10 @@
+import package comp3607project;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
 import org.junit.Test;
-import assignment1.Flight;
-import assignment1.LuggageSlip;
-import assignment1.Passenger;
 
 public class LuggageSlipTest{
 
