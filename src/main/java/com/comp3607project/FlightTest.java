@@ -1,6 +1,5 @@
 package com.comp3607project;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
@@ -66,7 +65,16 @@ public class FlightTest {
 
         // Test with a valid flight number
         String result = flight.checkInLuggage(passenger);
-        assertEquals("Luggage added to the flight", result);
+        double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(), Flight.getAllowedLuggage(passenger.getCabinClass()));
+        String expected = "";
+        if(passenger.getNumLuggage() == 0)
+            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + "\n" + "No Luggage to add\n";
+        else if(excessCost == 0)
+            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")\n";
+        else
+            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")" + " $" + excessCost + "\n";
+
+        assertEquals(expected, result);
 
         // Test with an invalid flight number
         Passenger invalidPassenger = new Passenger("HF546645", "Jane", "Doe", "HF939");
