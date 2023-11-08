@@ -1,4 +1,4 @@
-import package comp3607project;
+package com.comp3607project;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
