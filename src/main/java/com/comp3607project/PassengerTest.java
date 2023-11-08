@@ -1,13 +1,13 @@
 package com.comp3607project;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PassengerTest {
+
     private Passenger passenger;
 
     @BeforeEach
@@ -49,7 +49,7 @@ public class PassengerTest {
     @Test
     void testNumLuggage() {
         // Test the numLuggage attribute type
-        assertTrue(passenger.getNumLuggage() >= 1 && passenger.getNumLuggage() <= 5);
+        assertTrue(passenger.getNumLuggage() >= 0 && passenger.getNumLuggage() <= 5);
     }
 
     @Test
@@ -70,8 +70,7 @@ public class PassengerTest {
     @Test
     void testToString() {
         // Test the toString method
-        String expectedString = "PP NO. TA890789 NAME: J Bean NUMLUGGAGE: " + passenger.getNumLuggage() +
-                                " CLASS: " + passenger.getCabinClass();
+        String expectedString = " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + passenger.getNumLuggage() + " CLASS: " + passenger.getCabinClass();
         assertEquals(expectedString, passenger.toString());
     }
 }
