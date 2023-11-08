@@ -73,7 +73,7 @@ public class LuggageSlipTest{
         String text = "";
         for(int i=1; i<=owner.getNumLuggage(); i++)
         {
-            text += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + owner.getNumLuggage() + " CLASS: " + owner.getCabinClass() + " $105\n";
+            text += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + owner.getNumLuggage() + " CLASS: " + owner.getCabinClass() + " $105";
         }
         assertEquals(text, luggageslip2.toString());
 
