@@ -15,5 +15,7 @@ public class Main {
         User dev = new User("Dev", "dev@gmail.com", "password");
 
         dev.reviewSubmission(submission);
+
+        // Main should call the facade ProjectManager
     }
 }
