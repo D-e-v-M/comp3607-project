@@ -1,21 +1,16 @@
 package com.comp3607project;
 
+
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
 
-        // Simple testing
-        AssignmentResults submission = new AssignmentResults(1);
-        submission.setMark(79);
-        submission.setComment("Decent");
+        ProjectManager projectManager = new ProjectManager();
 
-        // String s = submission.toString();
-        // System.out.println(submission.toString());
+        // Specify the path to the zipped file
+        String filePath = "Initial.zip";
 
-        User dev = new User("Dev", "dev@gmail.com", "password");
-
-        dev.reviewSubmission(submission);
-
-        // Main should call the facade ProjectManager
+        // Process student submissions
+        projectManager.processStudentSubmissions(filePath);
     }
 }

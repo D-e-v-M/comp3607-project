@@ -12,6 +12,7 @@ import java.util.zip.ZipFile;
 
 
 public class Extractor {
+    //get all student zip files from main zip file
 
     public Extractor() {
     }
