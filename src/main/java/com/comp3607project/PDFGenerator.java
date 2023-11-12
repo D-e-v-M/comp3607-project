@@ -15,14 +15,14 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PDFGenerator {
+public class PDFGenerator implements DocumentBuilder {
 
     // main needs this
     PDFGenerator() {
 
     }
 
-    public void createPDF() throws FileNotFoundException, DocumentException {
+    public void createDocument() throws FileNotFoundException, DocumentException {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
 
@@ -59,7 +59,7 @@ public class PDFGenerator {
 
         // Filler content to be replaced later
         for (int i = 0; i < 10; i++) {
-            table.addCell("Test Case" + i);
+            table.addCell("Test Case " + i);
             table.addCell("Passed");
             table.addCell("No Feedback");
         }
