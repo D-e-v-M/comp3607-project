@@ -6,7 +6,7 @@ public class MarksAwarded {
     FlightTest flight;
     LuggageSlipTest luggageSlip;
     LuggageManifestTest luggageManifest;
-    int totalMarks;
+    int totalMarks = 0;
     
     public MarksAwarded(){
         passenger = new PassengerTest();
