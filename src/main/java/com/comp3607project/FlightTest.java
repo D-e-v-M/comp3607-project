@@ -1,6 +1,6 @@
 package com.comp3607project;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
@@ -11,18 +11,22 @@ import java.time.LocalDateTime;
 
 public class FlightTest {
     private Flight flight;
+    LocalDateTime creationDate;
+    private static int marksAwarded = 0;
 
     @BeforeEach
     public void testAttributeTypes() {
-        flight = new Flight("FL123", "New York", "Los Angeles", LocalDateTime.now());
+        creationDate = LocalDateTime.now();
+        flight = new Flight("FL123", "New York", "Los Angeles", creationDate);
     }
+    
     @Test
     public void testFlightNoAttribute() {
         String flightNo = flight.getFlightNo();
 
         assertNotNull(flightNo);
         assertTrue(flightNo instanceof String);
-        assertEquals("FL123", flightNo);
+        marksAwarded = marksAwarded + 1;
     }
 
     @Test
@@ -31,7 +35,7 @@ public class FlightTest {
 
         assertNotNull(destination);
         assertTrue(destination instanceof String);
-        assertEquals("New York", destination);
+        marksAwarded = marksAwarded + 1;
     }
 
     @Test
@@ -40,7 +44,7 @@ public class FlightTest {
 
         assertNotNull(origin);
         assertTrue(origin instanceof String);
-        assertEquals("Los Angeles", origin);
+        marksAwarded = marksAwarded + 1;
     }
 
     @Test
@@ -49,6 +53,7 @@ public class FlightTest {
 
         assertNotNull(flightDate);
         assertTrue(flightDate instanceof LocalDateTime);
+        marksAwarded = marksAwarded + 1;
     }
 
     @Test
@@ -57,7 +62,17 @@ public class FlightTest {
 
         assertNotNull(manifest);
         assertTrue(manifest instanceof LuggageManifest);
-        
+        marksAwarded = marksAwarded + 1; 
+    }
+
+    @Test
+    public void testFlightCreation()
+    {   
+        assertEquals("FL123", flight.getFlightNo());
+        assertEquals("New York", flight.getDestination());
+        assertEquals("Los Angeles", flight.getOrigin());
+        assertEquals(creationDate, flight.getFlightDate());
+        marksAwarded = marksAwarded + 2;
     }
 
     @Test
@@ -66,12 +81,22 @@ public class FlightTest {
 
         // Test with a valid flight number
         String result = flight.checkInLuggage(passenger);
-        assertEquals("Luggage added to the flight", result);
+        double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(), Flight.getAllowedLuggage(passenger.getCabinClass()));
+        String expected = "";
+        if(passenger.getNumLuggage() == 0)
+            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + "\n" + "No Luggage to add\n";
+        else if(excessCost == 0)
+            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")\n";
+        else
+            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")" + " $" + excessCost + "\n";
+
+        assertEquals(expected, result);
 
         // Test with an invalid flight number
         Passenger invalidPassenger = new Passenger("HF546645", "Jane", "Doe", "HF939");
         result = flight.checkInLuggage(invalidPassenger);
         assertEquals("Invalid flight", result);
+        marksAwarded = marksAwarded + 5;
     }
 
     @Test
@@ -80,7 +105,7 @@ public class FlightTest {
         // Test printing the luggage manifest
         String manifestString = flight.printLuggageManifest();
         assertNotNull(manifestString);
-        // Add assertions based on the expected format of the manifest string
+        marksAwarded = marksAwarded + 1;
     }
 
     @Test
@@ -90,6 +115,7 @@ public class FlightTest {
         assertEquals(2, Flight.getAllowedLuggage('B'));
         assertEquals(1, Flight.getAllowedLuggage('P'));
         assertEquals(0, Flight.getAllowedLuggage('E'));
+        marksAwarded = marksAwarded + 2;
     }
 
     @Test
@@ -99,6 +125,16 @@ public class FlightTest {
         // Test the toString method
         String flightString = flight.toString();
         assertNotNull(flightString);
-        // Add assertions based on the expected format of the flight string
+        marksAwarded = marksAwarded + 1;
+    }
+
+    @AfterAll
+    static void allocateMarks() {
+        System.out.println("Allocating marks: " + marksAwarded);
+    }
+
+    public static int getMarks()
+    {
+        return marksAwarded;
     }
 }
