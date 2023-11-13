@@ -1,6 +1,5 @@
 package com.comp3607project;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
@@ -9,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 
-public class FlightTest {
+public class FlightTest implements TestInterface{
     private Flight flight;
     LocalDateTime creationDate;
     private static int marksAwarded = 0;
@@ -128,12 +127,8 @@ public class FlightTest {
         marksAwarded = marksAwarded + 1;
     }
 
-    @AfterAll
-    static void allocateMarks() {
-        System.out.println("Allocating marks: " + marksAwarded);
-    }
-
-    public static int getMarks()
+    @Override
+    public int getMarks()
     {
         return marksAwarded;
     }
