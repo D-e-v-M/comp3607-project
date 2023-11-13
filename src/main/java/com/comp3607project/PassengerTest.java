@@ -3,12 +3,10 @@ package com.comp3607project;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PassengerTest {
+public class PassengerTest implements TestInterface{
 
     String passportNumber = "TA890789";
     String firstName = "Joe";
@@ -106,4 +104,9 @@ public class PassengerTest {
         marksAwarded = marksAwarded + 3;
     }
 
+    @Override
+    public int getMarks()
+    {
+        return marksAwarded;
+    }
 }
