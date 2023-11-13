@@ -16,7 +16,7 @@ public class MarksAwarded {
 
     }
 
-    private int calculateTotalMarks() {
+    public int calculateTotalMarks() {
         totalMarks = getPassengerTestMarks() + getFlightTestMarks() + getLuggageSlipTestMarks() + getLuggageManifestTestMarks();
         return totalMarks;
     }
