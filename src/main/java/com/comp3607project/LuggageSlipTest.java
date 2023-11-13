@@ -4,11 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LuggageSlipTest{
+public class LuggageSlipTest implements TestInterface{
 
     private String passportNumber = "TA890789";
     private String firstName = "Joe";
@@ -97,12 +96,8 @@ public class LuggageSlipTest{
         marksAwarded = marksAwarded + 2;
     }
 
-    @AfterAll
-    static void allocateMarks() {
-        System.out.println("Allocating marks: " + marksAwarded);
-    }
-
-    public static int getMarks()
+    @Override
+    public int getMarks()
     {
         return marksAwarded;
     }
