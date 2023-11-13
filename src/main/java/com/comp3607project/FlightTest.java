@@ -81,7 +81,7 @@ public class FlightTest {
 
         // Test with a valid flight number
         String result = flight.checkInLuggage(passenger);
-        double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(), Flight.getAllowedLuggage(passenger.getCabinClass()));
+        double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(), flight.getAllowedLuggage(passenger.getCabinClass()));
         String expected = "";
         if(passenger.getNumLuggage() == 0)
             expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + "\n" + "No Luggage to add\n";
@@ -111,10 +111,10 @@ public class FlightTest {
     @Test
     public void testGetAllowedLuggage() {
         // Test the getAllowedLuggage method for different cabin classes
-        assertEquals(3, Flight.getAllowedLuggage('F'));
-        assertEquals(2, Flight.getAllowedLuggage('B'));
-        assertEquals(1, Flight.getAllowedLuggage('P'));
-        assertEquals(0, Flight.getAllowedLuggage('E'));
+        assertEquals(3, flight.getAllowedLuggage('F'));
+        assertEquals(2, flight.getAllowedLuggage('B'));
+        assertEquals(1, flight.getAllowedLuggage('P'));
+        assertEquals(0, flight.getAllowedLuggage('E'));
         marksAwarded = marksAwarded + 2;
     }
 
