@@ -1,125 +1,143 @@
 package com.comp3607project;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LuggageManifestTest {
-    private LuggageManifest luggageManifest;
-    private Flight flight;
-    private Passenger passenger;
-    ArrayList<LuggageSlip> slips;
+public class LuggageManifestTest{
+    private Passenger p;
+    private Flight f;
+    private static int marksAwarded = 0;
 
     @BeforeEach
-    public void setUp() {
-        slips = new ArrayList<LuggageSlip>();
-        luggageManifest = new LuggageManifest();
-        flight = new Flight("BW600", "Destination", "Origin", LocalDateTime.now());
-        passenger = new Passenger("TA890789", "John", "Bean", "BW600");
-        passenger.assignRandomCabinClass();
-        passenger.assignRandomNumLuggage();
+    public void initAddLuggage(){
+        LocalDateTime d = LocalDateTime.of(2023, 1, 23, 10, 0, 0);
+        f = new Flight("BW600", "POS", "ANR",d);
+        p = new Passenger("TA890789", "Joe", "Bean", "BW600");
     }
 
     @Test
-    void testSlipsAttributeType() {
-        slips = luggageManifest.getSlips();
-        assertNotNull(slips);
-        assertTrue(slips instanceof ArrayList);
+    public void testLuggageSlipIDAttribute(){
+        LuggageManifest LM = f.getManifest();
+        assertTrue(LM.getSlips() instanceof ArrayList);
+        marksAwarded = marksAwarded + 2; 
+    }
+
+    @Test 
+    public void testLuggageManifestCreation(){
+        LuggageManifest LM = f.getManifest();
+        assertNotNull(LM.getSlips());
+        marksAwarded = marksAwarded + 1; 
     }
 
     @Test
-    void testLuggageManifestConstructor() {
-        slips = luggageManifest.getSlips();
-        assertNotNull(slips);
-        assertEquals(0, slips.size());
-    }
-
-    @Test
-    public void testAddLuggage() {
-        // Test the addLuggage method
-        String expectedOutput = "";
-        int numLuggage = passenger.getNumLuggage();
-        int allowedLuggage = Flight.getAllowedLuggage(passenger.getCabinClass());
-        double excessPiecesCost = luggageManifest.getExcessLuggageCost(passenger.getNumLuggage(), allowedLuggage);
-
-        expectedOutput = "PP NO. " + passenger.getPassportNumber() + " NAME: "
-        + passenger.getFirstNameLetter() + "." + passenger.getLastName() + " NUMLUGGAGE: " +
-        passenger.getNumLuggage() + " CLASS: " + passenger.getCabinClass() + "\n";
-
-        if ((numLuggage == 0) || (numLuggage <= allowedLuggage))
-        {
-            slips.add(new LuggageSlip(passenger, flight));
-
-            if (numLuggage == 0)
-            {
-                expectedOutput+= "No Luggage to add. \n";
-            }
-
-            if (numLuggage <= allowedLuggage)
-            {
-                expectedOutput+= "Pieces Added: (" + numLuggage + "). Excess Cost: $0 \n";
-            }
-        }
-
-        if (numLuggage > allowedLuggage)
-        {
-                String label = "$" + excessPiecesCost;
-                slips.add(new LuggageSlip(passenger, flight, label));
-
-                expectedOutput+= "Pieces Added: (" + numLuggage + "). Excess Cost: $" + excessPiecesCost + "\n";
-        }
-        String output = luggageManifest.addLuggage(passenger, flight);
-        assertEquals(expectedOutput, output);
-        // Check if the slips collection contains the expected number of slips
-        assertEquals(1, luggageManifest.getSlips().size());
-    }
-
-    /* 
-    @Test
-    public void testGetExcessLuggageCost() {
-        // Test the getExcessLuggageCost method
-        int numLuggage = passenger.getNumLuggage();
-        int allowedLuggage = Flight.getAllowedLuggage(passenger.getCabinClass());
-        double excessPiecesCost;
+    public void testAddLuggage(){
+        String expected =(f.getManifest()).addLuggage(p,f);
+        String actual = "";
+        double excessCost = f.getManifest().getExcessLuggageCost(p.getNumLuggage(), f.getAllowedLuggage(p.getCabinClass()));
+        if(p.getNumLuggage() == 0)
+            actual = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "No Luggage to add.\n";
+        else if(excessCost == 0)
+            actual = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + "). Excess Cost: $0\n";
+        else
+            actual = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + ")." + " Excess Cost: $" + excessCost + "\n";
         
-        if (numLuggage <= allowedLuggage)
-        {
-            excessPiecesCost = 0;
+        assertEquals(expected, actual);
+        marksAwarded = marksAwarded + 6; 
+    }
+
+    @Test
+    public void testGetExcessLuggageCost(){
+        double expected =(f.getManifest()).getExcessLuggageCost(p.getNumLuggage(), f.getAllowedLuggage(p.getCabinClass()));
+        double actual = 0;
+        char cabinClass = p.getCabinClass();
+        int numAllowedPieces = f.getAllowedLuggage(cabinClass);
+        int numPieces = p.getNumLuggage();
+
+        if(p.getCabinClass() == 'E'){
+            numAllowedPieces = 0;
+            if(numPieces > numAllowedPieces){
+                actual = (numPieces - numAllowedPieces) * 35;
+            } 
         }
-        
+        else if (p.getCabinClass() == 'P'){
+            numAllowedPieces = 1;
+            if(numPieces > numAllowedPieces){
+                actual = (numPieces - numAllowedPieces) * 35;
+            } 
+        }
+        else if(p.getCabinClass() == 'B'){
+            numAllowedPieces = 2;
+            if(numPieces > numAllowedPieces){
+                actual = (numPieces - numAllowedPieces) * 35;
+            } 
+        }
+        else if (p.getCabinClass() == 'F'){
+            numAllowedPieces = 3;
+            if(numPieces > numAllowedPieces){
+                actual = (numPieces - numAllowedPieces) * 35;
+            }   
+        }
+
+        assertEquals(expected,actual, 0.01);
+        marksAwarded = marksAwarded + 3; 
+    }
+
+    @Test
+    public void testGetExcessLuggageCostByPassenger(){
+        String actual =(f.getManifest()).getExcessLuggageCostByPassenger(p.getPassportNumber());
+        double excessCost =(f.getManifest()).getExcessLuggageCost(p.getNumLuggage(), f.getAllowedLuggage(p.getCabinClass()));
+        String expected;
+
+        if(excessCost == 0)
+        {
+            expected = "No Cost";
+        }
         else
         {
-            int excessPieces = numLuggage - allowedLuggage;
-            excessPiecesCost = excessPieces * 35;
+            expected = "$" + excessCost;
         }
-        double cost = luggageManifest.getExcessLuggageCost(numLuggage, allowedLuggage);
-        assertEquals(excessPiecesCost, cost);
-    }*/
-
-    @Test
-    public void testGetExcessLuggageCostByPassenger() {
-        // Test the getExcessLuggageCostByPassenger method
-        luggageManifest.addLuggage(passenger, flight);
-        String costOutput = luggageManifest.getExcessLuggageCostByPassenger("TA890789");
-        assertEquals("$35", costOutput);
-
-        String noCostOutput = luggageManifest.getExcessLuggageCostByPassenger("NonExistentPassportNumber");
-        assertEquals("No Cost", noCostOutput);
+        
+        assertEquals(expected, actual);
+        marksAwarded = marksAwarded + 5;
     }
 
     @Test
-    public void testToString() {
-        // Test the toString method
-        luggageManifest.addLuggage(passenger, flight);
-        String manifestString = luggageManifest.toString();
-        // Create an expected manifest string based on the provided sample output
-        String expectedManifestString = "LUGGAGE MANIFEST: \n" +
-            "BW600_Bean_1 PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: 2 CLASS: P $35\n";
-        assertEquals(expectedManifestString, manifestString);
+    public void testToString(){
+        String actual = f.getManifest().toString();
+        double excessCost = f.getManifest().getExcessLuggageCost(p.getNumLuggage(), f.getAllowedLuggage(p.getCabinClass()));
+        String label;
+        if(excessCost == 0){
+            label = "";
+        }
+        else{
+            label = "$" + excessCost;
+        }
+        
+        String expected = "LUGGAGE MANIFEST: \n";
+        String slipOutput = "";
+        for(int i=1; i<=p.getNumLuggage(); i++)
+        {
+            slipOutput += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + " " + label + "\n";
+        }        
+        expected = expected + slipOutput + "\n";
+        assertEquals(expected, actual);
+        marksAwarded = marksAwarded + 3;
     }
+
+    @AfterAll
+    static void allocateMarks() {
+        System.out.println("Allocating marks: " + marksAwarded);
+    }
+
+    public static int getMarks()
+    {
+        return marksAwarded;
+    }
+
 }
