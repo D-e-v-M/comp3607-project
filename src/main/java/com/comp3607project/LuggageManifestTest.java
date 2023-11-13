@@ -5,11 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LuggageManifestTest{
+public class LuggageManifestTest implements TestInterface{
     private Passenger p;
     private Flight f;
     private static int marksAwarded = 0;
@@ -88,6 +87,7 @@ public class LuggageManifestTest{
         marksAwarded = marksAwarded + 3; 
     }
 
+     
     @Test
     public void testGetExcessLuggageCostByPassenger(){
         String actual =(f.getManifest()).getExcessLuggageCostByPassenger(p.getPassportNumber());
@@ -130,12 +130,8 @@ public class LuggageManifestTest{
         marksAwarded = marksAwarded + 3;
     }
 
-    @AfterAll
-    static void allocateMarks() {
-        System.out.println("Allocating marks: " + marksAwarded);
-    }
-
-    public static int getMarks()
+    @Override
+    public int getMarks()
     {
         return marksAwarded;
     }
