@@ -77,8 +77,6 @@ public class FlightTest implements TestInterface{
     @Test
     public void testCheckInLuggage() {
         Passenger passenger = new Passenger("HF546645", "Jane", "Doe", "FL123");
-
-        // Test with a valid flight number
         String result = flight.checkInLuggage(passenger);
         double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(), flight.getAllowedLuggage(passenger.getCabinClass()));
         String expected = "";
@@ -91,7 +89,6 @@ public class FlightTest implements TestInterface{
 
         assertEquals(expected, result);
 
-        // Test with an invalid flight number
         Passenger invalidPassenger = new Passenger("HF546645", "Jane", "Doe", "HF939");
         result = flight.checkInLuggage(invalidPassenger);
         assertEquals("Invalid flight", result);
@@ -100,8 +97,6 @@ public class FlightTest implements TestInterface{
 
     @Test
     public void testPrintLuggageManifest() {
-
-        // Test printing the luggage manifest
         String manifestString = flight.printLuggageManifest();
         assertNotNull(manifestString);
         marksAwarded = marksAwarded + 1;
@@ -109,7 +104,6 @@ public class FlightTest implements TestInterface{
 
     @Test
     public void testGetAllowedLuggage() {
-        // Test the getAllowedLuggage method for different cabin classes
         assertEquals(3, flight.getAllowedLuggage('F'));
         assertEquals(2, flight.getAllowedLuggage('B'));
         assertEquals(1, flight.getAllowedLuggage('P'));
@@ -120,8 +114,6 @@ public class FlightTest implements TestInterface{
     @Test
     public void testToString() {
         Flight flight = new Flight("FL123", "New York", "Los Angeles", LocalDateTime.now());
-
-        // Test the toString method
         String flightString = flight.toString();
         assertNotNull(flightString);
         marksAwarded = marksAwarded + 1;
