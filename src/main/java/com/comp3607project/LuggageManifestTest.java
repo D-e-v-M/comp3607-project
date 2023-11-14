@@ -36,15 +36,15 @@ public class LuggageManifestTest implements TestInterface{
 
     @Test
     public void testAddLuggage(){
-        String expected =(f.getManifest()).addLuggage(p,f);
-        String actual = "";
+        String actual =(f.getManifest()).addLuggage(p,f);
+        String expected = "";
         double excessCost = f.getManifest().getExcessLuggageCost(p.getNumLuggage(), f.getAllowedLuggage(p.getCabinClass()));
         if(p.getNumLuggage() == 0)
-            actual = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "No Luggage to add.\n";
-        else if(excessCost == 0)
-            actual = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + "). Excess Cost: $0\n";
+            expected = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "No Luggage to add.\n";
+        else if(p.getNumLuggage() > 0 && excessCost == 0)
+            expected = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + "). Excess Cost: $0\n";
         else
-            actual = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + ")." + " Excess Cost: $" + excessCost + "\n";
+            expected = "PP NO. " + p.getPassportNumber()+ " NAME: " + p.getFirstName().charAt(0) + "." + p.getLastName().toUpperCase() + " NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + ")." + " Excess Cost: $" + excessCost + "\n";
         
         assertEquals(expected, actual);
         marksAwarded = marksAwarded + 6; 
@@ -86,14 +86,20 @@ public class LuggageManifestTest implements TestInterface{
         assertEquals(expected,actual, 0.01);
         marksAwarded = marksAwarded + 3; 
     }
-
-     
+  
     @Test
     public void testGetExcessLuggageCostByPassenger(){
         String actual =(f.getManifest()).getExcessLuggageCostByPassenger(p.getPassportNumber());
-        double excessCost =(f.getManifest()).getExcessLuggageCost(p.getNumLuggage(), f.getAllowedLuggage(p.getCabinClass()));
+        
+        int allowedLuggage = f.getAllowedLuggage(p.getCabinClass());
+        int numLuggage = p.getNumLuggage();
+        double excessCost;
+        if (numLuggage == 0 || numLuggage <= allowedLuggage)
+            excessCost = 0;
+        else
+            excessCost = 35.0 * (numLuggage - allowedLuggage);
+        
         String expected;
-
         if(excessCost == 0)
         {
             expected = "No Cost";
@@ -125,7 +131,7 @@ public class LuggageManifestTest implements TestInterface{
         {
             slipOutput += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + p.getNumLuggage() + " CLASS: " + p.getCabinClass() + " " + label + "\n";
         }        
-        expected = expected + slipOutput + "\n";
+        expected = expected + slipOutput;
         assertEquals(expected, actual);
         marksAwarded = marksAwarded + 3;
     }
