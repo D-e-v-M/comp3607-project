@@ -20,8 +20,6 @@ public class PassengerTest implements TestInterface{
     public void setUp() {
         // Create a Passenger instance before each test
         passenger = new Passenger("TA890789", "Joe", "Bean", "BW600");
-        passenger.assignRandomCabinClass();
-        passenger.assignRandomNumLuggage();
     }
 
     @Test
@@ -90,7 +88,6 @@ public class PassengerTest implements TestInterface{
     @Test
     public void testAssignRandomCabinClass() {
         // Test the assignRandomCabinClass method
-        passenger.assignRandomCabinClass();
         assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
                    passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
         marksAwarded = marksAwarded + 2;
