@@ -18,13 +18,11 @@ public class PassengerTest implements TestInterface{
     
     @BeforeEach
     public void setUp() {
-        // Create a Passenger instance before each test
         passenger = new Passenger("TA890789", "Joe", "Bean", "BW600");
     }
 
     @Test
     public void testPassportNumberAttribute(){
-        // Test the passportNumber attribute type
         assertNotNull(passenger.getPassportNumber());
         assertTrue(passenger.getPassportNumber() instanceof String);
         marksAwarded = marksAwarded + 1;
@@ -32,7 +30,6 @@ public class PassengerTest implements TestInterface{
 
     @Test
     public void testFlightNoAttribute() {
-        // Test the flightNo attribute type
         assertNotNull(passenger.getFlightNo());
         assertTrue(passenger.getFlightNo() instanceof String);
         marksAwarded = marksAwarded + 1;
@@ -40,7 +37,6 @@ public class PassengerTest implements TestInterface{
 
     @Test
     public void testFirstNameAttribute() {
-        // Test the firstName attribute type
         assertNotNull(passenger.getFirstName());
         assertTrue(passenger.getFirstName() instanceof String);
         marksAwarded = marksAwarded + 1;
@@ -48,7 +44,6 @@ public class PassengerTest implements TestInterface{
 
     @Test
     public void testLastNameAttribute() {
-        // Test the lastName attribute type
         assertNotNull(passenger.getLastName());
         assertTrue(passenger.getLastName() instanceof String);
         marksAwarded = marksAwarded + 1;
@@ -56,14 +51,12 @@ public class PassengerTest implements TestInterface{
 
     @Test
     public void testNumLuggageAttribute() {
-        // Test the numLuggage attribute type
         assertTrue(passenger.getNumLuggage() >= 0 && passenger.getNumLuggage() <= 5);
         marksAwarded = marksAwarded + 1;
     }
 
     @Test
     public void testCabinClassAttribute() {
-        // Test the cabinClass attribute type
         assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
                    passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
         marksAwarded = marksAwarded + 1;
@@ -87,7 +80,6 @@ public class PassengerTest implements TestInterface{
 
     @Test
     public void testAssignRandomCabinClass() {
-        // Test the assignRandomCabinClass method
         assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
                    passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
         marksAwarded = marksAwarded + 2;
@@ -95,7 +87,6 @@ public class PassengerTest implements TestInterface{
 
     @Test
     public void testToString() {
-        // Test the toString method
         String expectedString = " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + passenger.getNumLuggage() + " CLASS: " + passenger.getCabinClass();
         assertEquals(expectedString, passenger.toString());
         marksAwarded = marksAwarded + 3;
