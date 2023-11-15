@@ -7,8 +7,8 @@ public class MarksAwarded {
     LuggageSlipTest luggageSlip;
     LuggageManifestTest luggageManifest;
     int totalMarks = 0;
-    
-    public MarksAwarded(){
+
+    public MarksAwarded() {
         passenger = new PassengerTest();
         flight = new FlightTest();
         luggageSlip = new LuggageSlipTest();
@@ -17,7 +17,8 @@ public class MarksAwarded {
     }
 
     public int calculateTotalMarks() {
-        totalMarks = getPassengerTestMarks() + getFlightTestMarks() + getLuggageSlipTestMarks() + getLuggageManifestTestMarks();
+        totalMarks = getPassengerTestMarks() + getFlightTestMarks() + getLuggageSlipTestMarks()
+                + getLuggageManifestTestMarks();
         return totalMarks;
     }
 
