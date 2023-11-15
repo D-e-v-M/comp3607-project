@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 //import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
@@ -20,7 +22,14 @@ public class LuggageSlipTest implements TestInterface {
     private LuggageSlip luggageslip2;
     private static int marksAwarded = 0;
 
+    private static ArrayList<TestCase> testCasesList;
+    
+
     public LuggageSlipTest() {
+        
+        testCasesList = new ArrayList<>();
+        
+
         owner = new Passenger(passportNumber, firstName, lastName, flightNo);
         d = LocalDateTime.of(2023, 1, 23, 10, 0, 0);
         f = new Flight(flightNo, "POS", "ANR", d);
@@ -39,68 +48,163 @@ public class LuggageSlipTest implements TestInterface {
 
     @Test
     public void testOwnerAttribute() {
-        assertNotNull(luggageslip.getOwner());
+
+        try{
+           assertNotNull(luggageslip.getOwner());
         assertTrue(luggageslip.getOwner() instanceof Passenger);
         marksAwarded = marksAwarded + 1;
+          
+          TestCase testCase= new TestCase("testOwnerAttribute",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testOwnerAttribute",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+        
     }
 
     @Test
     public void testluggageSlipIDCounterAttribute() {
-        assertNotNull(luggageslip.getLuggageSlipIDCounter());
-        assertTrue(luggageslip.getLuggageSlipIDCounter() >= 1);
-        marksAwarded = marksAwarded + 1;
+
+        try{
+            assertNotNull(luggageslip.getLuggageSlipIDCounter());
+            assertTrue(luggageslip.getLuggageSlipIDCounter() >= 1);
+           marksAwarded = marksAwarded + 1;
+          
+          TestCase testCase= new TestCase("testluggageSlipIDCounterAttribute",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testluggageSlipIDCounterAttribute",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+        
     }
 
     @Test
     public void testLuggageSlipIDAttribute() {
-        assertNotNull(luggageslip.getLuggageSlipID());
+
+        try{
+             assertNotNull(luggageslip.getLuggageSlipID());
         assertTrue(luggageslip.getLuggageSlipID() instanceof String);
         marksAwarded = marksAwarded + 1;
+          
+          TestCase testCase= new TestCase("testLuggageSlipIDAttribute",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testLuggageSlipIDAttribute",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+       
     }
 
     @Test
     public void testLabelAttribute() {
-        assertNotNull(luggageslip2.getLabel());
+        try{
+            assertNotNull(luggageslip2.getLabel());
         assertTrue(luggageslip.getLabel() instanceof String);
         marksAwarded = marksAwarded + 1;
+          
+          TestCase testCase= new TestCase(" testLabelAttribute",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase(" testLabelAttribute",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+        
     }
 
     @Test
     public void testLuggageSlipCreation() {
-        assertNotNull(luggageslip);
+        try{
+            assertNotNull(luggageslip);
         assertEquals("", luggageslip.getLabel());
         assertEquals(owner, luggageslip.getOwner());
         marksAwarded = marksAwarded + 3;
+          
+          TestCase testCase= new TestCase("testLuggageSlipCreation",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testLuggageSlipCreation",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+       
     }
 
     @Test
     public void testOverloadLuggageSlipCreation() {
-        assertNotNull(luggageslip2);
+
+        try{
+            assertNotNull(luggageslip2);
         assertEquals("$105", luggageslip2.getLabel());
         assertEquals(owner, luggageslip2.getOwner());
         marksAwarded = marksAwarded + 3;
+          
+          TestCase testCase= new TestCase("testOverloadLuggageSlipCreation",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testOverloadLuggageSlipCreation",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+        
     }
 
     @Test
     public void testHasOwner() {
-        assertEquals(luggageslip.getOwner().getPassportNumber(), "TA890789");
+        try{
+             assertEquals(luggageslip.getOwner().getPassportNumber(), "TA890789");
         marksAwarded = marksAwarded + 2;
+          
+          TestCase testCase= new TestCase("testHasOwner",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testHasOwner",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+       
     }
 
     @Test
     public void testToString() {
-        String text = "";
+
+        try{
+           String text = "";
         for (int i = 1; i <= owner.getNumLuggage(); i++) {
             text += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + owner.getNumLuggage()
                     + " CLASS: " + owner.getCabinClass() + " $105\n";
         }
         assertEquals(text, luggageslip2.toString());
         marksAwarded = marksAwarded + 2;
+          TestCase testCase= new TestCase("testToString",true,"");
+          testCasesList.add(testCase);
+      }catch(AssertionError e){
+        TestCase testCase= new TestCase("testToString",false,e.getMessage());
+        testCasesList.add(testCase);
+
+      }
+
+        
     }
 
     @Override
     public int getMarks() {
         return marksAwarded;
+    }
+
+    public static ArrayList<TestCase> getTestCasesList(){
+        return testCasesList;
     }
 
 }

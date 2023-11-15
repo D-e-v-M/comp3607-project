@@ -11,19 +11,18 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+
 public class FlightTest implements TestInterface {
     private Flight flight;
     LocalDateTime creationDate;
     private static int marksAwarded = 0;
 
-    private ArrayList<String> testCasesList;
-    private ArrayList<String> passStatusList;
-    private ArrayList<String> feedbackList;
+    private static ArrayList<TestCase> testCasesList;
+   
 
     public FlightTest() {
         testCasesList = new ArrayList<>();
-        passStatusList = new ArrayList<>();
-        feedbackList = new ArrayList<>();
+       
 
         creationDate = LocalDateTime.now();
         flight = new Flight("FL123", "New York", "Los Angeles", creationDate);
@@ -37,65 +36,152 @@ public class FlightTest implements TestInterface {
 
     @Test
     public void testFlightNoAttribute() {
-        String flightNo = flight.getFlightNo();
+        try{
+            String flightNo = flight.getFlightNo();
 
-        assertNotNull(flightNo);
-        assertTrue(flightNo instanceof String);
-        marksAwarded = marksAwarded + 1;
+            assertNotNull(flightNo);
+            assertTrue(flightNo instanceof String);
+            marksAwarded = marksAwarded + 1;
+            
+            TestCase testCase= new TestCase("testFlightNoAttribute",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testFlightNoAttribute",false,e.getMessage());
+          testCasesList.add(testCase);
+        }
 
-        testCasesList.add("testFlightNoAttribute");
-        passStatusList.add("Passed");
-        feedbackList.add("WHatever");
+       
     }
 
     @Test
     public void testDestinationAttribute() {
-        String destination = flight.getDestination();
 
-        assertNotNull(destination);
-        assertTrue(destination instanceof String);
-        marksAwarded = marksAwarded + 1;
+        try{
+            String destination = flight.getDestination();
+
+                
+            assertNotNull(destination);
+            assertTrue(destination instanceof String);
+            marksAwarded = marksAwarded + 1;
+            
+            TestCase testCase= new TestCase("testDestinationNoAttribute",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testDestinationNoAttribute",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+        
+
+
+        
     }
 
     @Test
     public void testOriginAttribute() {
-        String origin = flight.getOrigin();
 
-        assertNotNull(origin);
-        assertTrue(origin instanceof String);
-        marksAwarded = marksAwarded + 1;
+        
+        try{
+            String origin = flight.getOrigin();
+
+                
+            assertNotNull(origin);
+            assertTrue(origin instanceof String);
+            marksAwarded = marksAwarded + 1;
+            
+            TestCase testCase= new TestCase("testOriginAttribute",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testOriginAttribute",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+
+        
+        
+
+        
+
+        
     }
 
     @Test
     public void testFlightDateAttribute() {
-        LocalDateTime flightDate = flight.getFlightDate();
 
-        assertNotNull(flightDate);
-        assertTrue(flightDate instanceof LocalDateTime);
-        marksAwarded = marksAwarded + 1;
+        
+        try{
+             LocalDateTime flightDate = flight.getFlightDate();
+
+                
+            assertNotNull(flightDate);
+            assertTrue(flightDate instanceof LocalDateTime);
+            marksAwarded = marksAwarded + 1;
+            
+            TestCase testCase= new TestCase("testFlightDateAttribute",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testFlightDatettribute",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+       
+
+        
+
+        
     }
 
     @Test
     public void testManifestAttribute() {
-        LuggageManifest manifest = flight.getManifest();
 
-        assertNotNull(manifest);
-        assertTrue(manifest instanceof LuggageManifest);
-        marksAwarded = marksAwarded + 1;
+        
+        try{
+            LuggageManifest manifest = flight.getManifest();
+
+                
+            assertNotNull(manifest);
+            assertTrue(manifest instanceof LuggageManifest);
+            marksAwarded = marksAwarded + 1;
+            
+            TestCase testCase= new TestCase("testManifestAttribute",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testManifestAttribute",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+        
+
+        
+
+       
     }
 
     @Test
     public void testFlightCreation() {
-        assertEquals("FL123", flight.getFlightNo());
+
+        try{
+             assertEquals("FL123", flight.getFlightNo());
         assertEquals("New York", flight.getDestination());
         assertEquals("Los Angeles", flight.getOrigin());
         assertEquals(creationDate, flight.getFlightDate());
         marksAwarded = marksAwarded + 2;
+            
+            TestCase testCase= new TestCase("testFlightCreation",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testFlightCreation",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+      
     }
 
     @Test
     public void testCheckInLuggage() {
-        Passenger passenger = new Passenger("HF546645", "Jane", "Doe", "FL123");
+
+         try{
+              Passenger passenger = new Passenger("HF546645", "Jane", "Doe", "FL123");
         String result = flight.checkInLuggage(passenger);
         double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(),
                 flight.getAllowedLuggage(passenger.getCabinClass()));
@@ -120,47 +206,82 @@ public class FlightTest implements TestInterface {
         result = flight.checkInLuggage(invalidPassenger);
         assertEquals("Invalid flight", result);
         marksAwarded = marksAwarded + 5;
+            
+            TestCase testCase= new TestCase("testCheckInLuggage",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testCheckInLuggage",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+
+       
     }
 
     @Test
     public void testPrintLuggageManifest() {
-        String manifestString = flight.printLuggageManifest();
+
+        try{
+             String manifestString = flight.printLuggageManifest();
         assertNotNull(manifestString);
         marksAwarded = marksAwarded + 1;
+            TestCase testCase= new TestCase("testPrintLuggageManifest",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testPrintLuggageManifest",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+        
+       
     }
 
     @Test
     public void testGetAllowedLuggage() {
-        assertEquals(3, flight.getAllowedLuggage('F'));
+
+        try{
+               assertEquals(3, flight.getAllowedLuggage('F'));
         assertEquals(2, flight.getAllowedLuggage('B'));
         assertEquals(1, flight.getAllowedLuggage('P'));
         assertEquals(0, flight.getAllowedLuggage('E'));
         marksAwarded = marksAwarded + 2;
+            TestCase testCase= new TestCase("testGetAllowedLuggage",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testGetAllowedLuggage",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+      
     }
 
     @Test
     public void testToString() {
-        Flight flight = new Flight("FL123", "New York", "Los Angeles", LocalDateTime.now());
+
+        try{
+               Flight flight = new Flight("FL123", "New York", "Los Angeles", LocalDateTime.now());
         String flightString = flight.toString();
         assertNotNull(flightString);
         marksAwarded = marksAwarded + 1;
+            TestCase testCase= new TestCase("testToString",true,"");
+             testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testToString",false,e.getMessage());
+           testCasesList.add(testCase);
+
+        }
+
+       
     }
 
-    @Test
-    public void sendDataToGenerator() throws FileNotFoundException, DocumentException {
-        DocumentBuilder generator = new PDFGenerator();
-
-        generator.addTestCases(testCasesList);
-        generator.addPassStatus(passStatusList);
-        generator.addFeedback(feedbackList);
-
-        System.out.println(testCasesList.size());
-
-        generator.createDocument();
-    }
+   
 
     @Override
     public int getMarks() {
         return marksAwarded;
+    }
+
+    public static ArrayList<TestCase> getTestCasesList(){
+        return testCasesList;
     }
 }

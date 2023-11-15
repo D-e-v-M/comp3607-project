@@ -18,35 +18,24 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFGenerator implements DocumentBuilder {
 
-    private String[] testCases;
-    private String[] passStatus;
-    private String[] feedback;
+    
+  
 
-    private ArrayList<String> testCasesList;
-    private ArrayList<String> passStatusList;
-    private ArrayList<String> feedbackList;
+    private ArrayList<TestCase> testCasesList;
+    
 
     // main needs this
     PDFGenerator() {
         testCasesList = new ArrayList<>();
-        passStatusList = new ArrayList<>();
-        feedbackList = new ArrayList<>();
     }
+        
 
-    public void addTestCases(ArrayList<String> testCases) {
+    public void addTestCases(ArrayList<TestCase> testCases) {
         testCasesList.addAll(testCases);
     }
 
-    public void addPassStatus(ArrayList<String> passStatus) {
-        passStatusList.addAll(passStatus);
-    }
-
-    public void addFeedback(ArrayList<String> feedback) {
-        feedbackList.addAll(feedback);
-    }
-
     public void createDocument() throws FileNotFoundException, DocumentException {
-        makePrimitiveArrays(testCasesList, passStatusList, feedbackList);
+        //makePrimitiveArrays(testCasesList);
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf")); // Still have to pass the
                                                                                       // student's ID
@@ -59,7 +48,7 @@ public class PDFGenerator implements DocumentBuilder {
 
         PdfPTable table = new PdfPTable(new float[] { 4, 3, 10 });
         addTableHeader(table);
-        addRows(table, testCases, passStatus, feedback);
+        addRows(table, testCasesList);
 
         document.add(paragraph);
         document.add(table);
@@ -80,13 +69,19 @@ public class PDFGenerator implements DocumentBuilder {
                 });
     }
 
-    private void addRows(PdfPTable table, String[] testCases, String[] passStatus, String[] feedback) {
+    private void addRows(PdfPTable table, ArrayList<TestCase> testCases) {
+        String status;
 
         // Filler content to be replaced later
-        for (int i = 0; i < testCases.length; i++) {
-            table.addCell(testCases[i]);
-            table.addCell(passStatus[i]);
-            table.addCell(feedback[i]);
+        for(TestCase t : testCases){
+            if(t.isPassed())
+                status="Passed";
+            else
+                status="Failed";
+            table.addCell(t.getName());
+            table.addCell(status);
+            table.addCell(t.getFeedback());
+
         }
 
         // Leaving this code for now just in case
@@ -107,11 +102,6 @@ public class PDFGenerator implements DocumentBuilder {
         // table.addCell(verticalAlignCell);
     }
 
-    private void makePrimitiveArrays(ArrayList<String> testCasesList, ArrayList<String> passStatusList,
-            ArrayList<String> feedbackList) {
-        testCases = testCasesList.toArray(new String[0]);
-        passStatus = passStatusList.toArray(new String[0]);
-        feedback = feedbackList.toArray(new String[0]);
-    }
+   
 
 }

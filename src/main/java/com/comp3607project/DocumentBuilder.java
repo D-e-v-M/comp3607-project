@@ -8,9 +8,7 @@ import com.itextpdf.text.DocumentException;
 public interface DocumentBuilder {
     public void createDocument() throws FileNotFoundException, DocumentException;
 
-    public void addTestCases(ArrayList<String> testCases);
-
-    public void addPassStatus(ArrayList<String> passStatus);
-
-    public void addFeedback(ArrayList<String> feedback);
+    public void addTestCases(ArrayList<TestCase> testCases);
 }
+
+

@@ -15,7 +15,14 @@ public class LuggageManifestTest implements TestInterface {
     private LocalDateTime d;
     private static int marksAwarded = 0;
 
+    private static ArrayList<TestCase> testCasesList;
+    
+
     public LuggageManifestTest() {
+        
+        testCasesList = new ArrayList<>();
+      
+
         d = LocalDateTime.of(2023, 1, 23, 10, 0, 0);
         f = new Flight("BW600", "POS", "ANR", d);
         p = new Passenger("TA890789", "Joe", "Bean", "BW600");
@@ -30,21 +37,48 @@ public class LuggageManifestTest implements TestInterface {
 
     @Test
     public void testLuggageSlipIDAttribute() {
-        LuggageManifest LM = f.getManifest();
-        assertTrue(LM.getSlips() instanceof ArrayList);
-        marksAwarded = marksAwarded + 2;
+        try{
+              LuggageManifest LM = f.getManifest();
+
+                
+            assertTrue(LM.getSlips() instanceof ArrayList);
+            marksAwarded = marksAwarded + 2;
+            
+            TestCase testCase= new TestCase("testLuggageSlipIDAttribute",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testLuggageSlipIDAttribute",false,e.getMessage());
+          testCasesList.add(testCase);
+
+        }
+      
+        
     }
 
     @Test
     public void testLuggageManifestCreation() {
-        LuggageManifest LM = f.getManifest();
-        assertNotNull(LM.getSlips());
+        try{
+            LuggageManifest LM = f.getManifest();
+
+                
+            assertNotNull(LM.getSlips());
         marksAwarded = marksAwarded + 1;
+            
+            TestCase testCase= new TestCase("testLuggageManifestCreation",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testLuggageManifestCreation",false,e.getMessage());
+          testCasesList.add(testCase);
+
+        }
+        
+        
     }
 
     @Test
     public void testAddLuggage() {
-        String actual = (f.getManifest()).addLuggage(p, f);
+        try{
+            String actual = (f.getManifest()).addLuggage(p, f);
         String expected = "";
         double excessCost = f.getManifest().getExcessLuggageCost(p.getNumLuggage(),
                 f.getAllowedLuggage(p.getCabinClass()));
@@ -62,94 +96,154 @@ public class LuggageManifestTest implements TestInterface {
                     + p.getCabinClass() + "\n" + "Pieces Added: " + "(" + p.getNumLuggage() + ")." + " Excess Cost: $"
                     + excessCost + "\n";
 
-        assertEquals(expected, actual);
+                
+             assertEquals(expected, actual);
         marksAwarded = marksAwarded + 6;
+            
+            TestCase testCase= new TestCase("testAddLuggage",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testAddLuggage",false,e.getMessage());
+          testCasesList.add(testCase);
+
+        }
+        
+
+       
     }
 
     @Test
     public void testGetExcessLuggageCost() {
-        double expected = (f.getManifest()).getExcessLuggageCost(p.getNumLuggage(),
-                f.getAllowedLuggage(p.getCabinClass()));
-        double actual = 0;
-        char cabinClass = p.getCabinClass();
-        int numAllowedPieces = f.getAllowedLuggage(cabinClass);
-        int numPieces = p.getNumLuggage();
 
-        if (p.getCabinClass() == 'E') {
-            numAllowedPieces = 0;
-            if (numPieces > numAllowedPieces) {
-                actual = (numPieces - numAllowedPieces) * 35;
+        try{
+            double expected = (f.getManifest()).getExcessLuggageCost(p.getNumLuggage(),
+                    f.getAllowedLuggage(p.getCabinClass()));
+            double actual = 0;
+            char cabinClass = p.getCabinClass();
+            int numAllowedPieces = f.getAllowedLuggage(cabinClass);
+            int numPieces = p.getNumLuggage();
+
+            if (p.getCabinClass() == 'E') {
+                numAllowedPieces = 0;
+                if (numPieces > numAllowedPieces) {
+                    actual = (numPieces - numAllowedPieces) * 35;
+                }
+            } else if (p.getCabinClass() == 'P') {
+                numAllowedPieces = 1;
+                if (numPieces > numAllowedPieces) {
+                    actual = (numPieces - numAllowedPieces) * 35;
+                }
+            } else if (p.getCabinClass() == 'B') {
+                numAllowedPieces = 2;
+                if (numPieces > numAllowedPieces) {
+                    actual = (numPieces - numAllowedPieces) * 35;
+                }
+            } else if (p.getCabinClass() == 'F') {
+                numAllowedPieces = 3;
+                if (numPieces > numAllowedPieces) {
+                    actual = (numPieces - numAllowedPieces) * 35;
+                }
             }
-        } else if (p.getCabinClass() == 'P') {
-            numAllowedPieces = 1;
-            if (numPieces > numAllowedPieces) {
-                actual = (numPieces - numAllowedPieces) * 35;
-            }
-        } else if (p.getCabinClass() == 'B') {
-            numAllowedPieces = 2;
-            if (numPieces > numAllowedPieces) {
-                actual = (numPieces - numAllowedPieces) * 35;
-            }
-        } else if (p.getCabinClass() == 'F') {
-            numAllowedPieces = 3;
-            if (numPieces > numAllowedPieces) {
-                actual = (numPieces - numAllowedPieces) * 35;
-            }
+
+
+                
+          assertEquals(expected, actual, 0.01);
+          marksAwarded = marksAwarded + 3;
+            
+            TestCase testCase= new TestCase("testGetExcessLuggageCost",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testGetExcessLuggageCost",false,e.getMessage());
+          testCasesList.add(testCase);
+
         }
 
-        assertEquals(expected, actual, 0.01);
-        marksAwarded = marksAwarded + 3;
+        
+        
     }
 
     @Test
     public void testGetExcessLuggageCostByPassenger() {
-        String actual = (f.getManifest()).getExcessLuggageCostByPassenger(p.getPassportNumber());
 
-        int allowedLuggage = f.getAllowedLuggage(p.getCabinClass());
-        int numLuggage = p.getNumLuggage();
-        double excessCost;
-        if (numLuggage == 0 || numLuggage <= allowedLuggage)
-            excessCost = 0;
-        else
-            excessCost = 35.0 * (numLuggage - allowedLuggage);
+        try{
+           String actual = (f.getManifest()).getExcessLuggageCostByPassenger(p.getPassportNumber());
 
-        String expected;
-        if (excessCost == 0) {
-            expected = "No Cost";
-        } else {
-            expected = "$" + excessCost;
+            int allowedLuggage = f.getAllowedLuggage(p.getCabinClass());
+            int numLuggage = p.getNumLuggage();
+            double excessCost;
+            if (numLuggage == 0 || numLuggage <= allowedLuggage)
+                excessCost = 0;
+            else
+                excessCost = 35.0 * (numLuggage - allowedLuggage);
+
+            String expected;
+            if (excessCost == 0) {
+                expected = "No Cost";
+            } else {
+                expected = "$" + excessCost;
+            }
+
+            assertEquals(expected, actual);
+             marksAwarded = marksAwarded + 5;
+            
+            TestCase testCase= new TestCase("testGetExcessLuggageCostByPassenger",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testGetExcessLuggageCostByPassenger",false,e.getMessage());
+          testCasesList.add(testCase);
+
         }
 
-        assertEquals(expected, actual);
-        marksAwarded = marksAwarded + 5;
+        
+
+        
     }
 
     @Test
     public void testToString() {
-        String actual = f.getManifest().toString();
-        double excessCost = f.getManifest().getExcessLuggageCost(p.getNumLuggage(),
-                f.getAllowedLuggage(p.getCabinClass()));
-        String label;
-        if (excessCost == 0) {
-            label = "";
-        } else {
-            label = "$" + excessCost;
+        try{
+            String actual = f.getManifest().toString();
+            double excessCost = f.getManifest().getExcessLuggageCost(p.getNumLuggage(),
+                    f.getAllowedLuggage(p.getCabinClass()));
+            String label;
+            if (excessCost == 0) {
+                label = "";
+            } else {
+                label = "$" + excessCost;
+            }
+
+            String expected = "LUGGAGE MANIFEST: \n";
+            String slipOutput = "";
+            for (int i = 1; i <= p.getNumLuggage(); i++) {
+                slipOutput += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + p.getNumLuggage()
+                        + " CLASS: " + p.getCabinClass() + " " + label + "\n";
+            }
+            expected = expected + slipOutput;
+
+                
+            assertEquals(expected, actual);
+            marksAwarded = marksAwarded + 3;
+            
+            TestCase testCase= new TestCase("testToString",true,"");
+            testCasesList.add(testCase);
+        }catch(AssertionError e){
+          TestCase testCase= new TestCase("testToString",false,e.getMessage());
+          testCasesList.add(testCase);
+
         }
 
-        String expected = "LUGGAGE MANIFEST: \n";
-        String slipOutput = "";
-        for (int i = 1; i <= p.getNumLuggage(); i++) {
-            slipOutput += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + p.getNumLuggage()
-                    + " CLASS: " + p.getCabinClass() + " " + label + "\n";
-        }
-        expected = expected + slipOutput;
-        assertEquals(expected, actual);
-        marksAwarded = marksAwarded + 3;
+        
+        
     }
 
     @Override
     public int getMarks() {
         return marksAwarded;
     }
+
+    public static ArrayList<TestCase> getTestCasesList(){
+        return testCasesList;
+    }
+    
 
 }
