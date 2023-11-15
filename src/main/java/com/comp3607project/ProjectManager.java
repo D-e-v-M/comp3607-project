@@ -15,7 +15,7 @@ public class ProjectManager {
     }
 
     public void processStudentSubmissions(String filePath) {
-        String destPath = "/resources";
+        String destPath = "comp3607-project\\src\\main\\java\\com\\comp3607project\\submissions";
         try {
             List<File> secondaryZips = extractor.extractSecondaryZips(filePath, destPath);
             this.processor.processSubmissions(secondaryZips);
