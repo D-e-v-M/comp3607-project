@@ -16,7 +16,7 @@ public class SubmissionProcessor {
     }
 
     public void processSubmissions(List<File> submissions) throws IOException {
-        File destAddr = new File("src\\test\\java\\com\\comp3607project");
+        File destAddr = new File("src\\main\\java\\com\\comp3607project");
 
         for (File file : submissions) {
             try (ZipFile studentSubmission = new ZipFile(file)) {
