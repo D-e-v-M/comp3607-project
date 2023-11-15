@@ -1,24 +1,40 @@
 package com.comp3607project;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import com.itextpdf.text.DocumentException;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-public class FlightTest implements TestInterface{
+public class FlightTest implements TestInterface {
     private Flight flight;
     LocalDateTime creationDate;
     private static int marksAwarded = 0;
 
-    @BeforeEach
-    public void testAttributeTypes() {
+    private ArrayList<String> testCasesList;
+    private ArrayList<String> passStatusList;
+    private ArrayList<String> feedbackList;
+
+    public FlightTest() {
+        testCasesList = new ArrayList<>();
+        passStatusList = new ArrayList<>();
+        feedbackList = new ArrayList<>();
+
         creationDate = LocalDateTime.now();
         flight = new Flight("FL123", "New York", "Los Angeles", creationDate);
     }
-    
+
+    // @BeforeEach
+    // public void testAttributeTypes() {
+    // creationDate = LocalDateTime.now();
+    // flight = new Flight("FL123", "New York", "Los Angeles", creationDate);
+    // }
+
     @Test
     public void testFlightNoAttribute() {
         String flightNo = flight.getFlightNo();
@@ -26,6 +42,10 @@ public class FlightTest implements TestInterface{
         assertNotNull(flightNo);
         assertTrue(flightNo instanceof String);
         marksAwarded = marksAwarded + 1;
+
+        testCasesList.add("testFlightNoAttribute");
+        passStatusList.add("Passed");
+        feedbackList.add("WHatever");
     }
 
     @Test
@@ -61,12 +81,11 @@ public class FlightTest implements TestInterface{
 
         assertNotNull(manifest);
         assertTrue(manifest instanceof LuggageManifest);
-        marksAwarded = marksAwarded + 1; 
+        marksAwarded = marksAwarded + 1;
     }
 
     @Test
-    public void testFlightCreation()
-    {   
+    public void testFlightCreation() {
         assertEquals("FL123", flight.getFlightNo());
         assertEquals("New York", flight.getDestination());
         assertEquals("Los Angeles", flight.getOrigin());
@@ -78,14 +97,22 @@ public class FlightTest implements TestInterface{
     public void testCheckInLuggage() {
         Passenger passenger = new Passenger("HF546645", "Jane", "Doe", "FL123");
         String result = flight.checkInLuggage(passenger);
-        double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(), flight.getAllowedLuggage(passenger.getCabinClass()));
+        double excessCost = flight.getManifest().getExcessLuggageCost(passenger.getNumLuggage(),
+                flight.getAllowedLuggage(passenger.getCabinClass()));
         String expected = "";
-        if(passenger.getNumLuggage() == 0)
-            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + "\n" + "No Luggage to add\n";
-        else if(excessCost == 0)
-            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")\n";
+        if (passenger.getNumLuggage() == 0)
+            expected = "PP NO." + passenger.getPassportNumber() + " NAME:" + passenger.getFirstName().charAt(0) + "."
+                    + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:"
+                    + passenger.getCabinClass() + "\n" + "No Luggage to add\n";
+        else if (excessCost == 0)
+            expected = "PP NO." + passenger.getPassportNumber() + " NAME:" + passenger.getFirstName().charAt(0) + "."
+                    + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:"
+                    + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")\n";
         else
-            expected = "PP NO." + passenger.getPassportNumber()+ " NAME:" + passenger.getFirstName().charAt(0) + "." + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:" + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")" + " $" + excessCost + "\n";
+            expected = "PP NO." + passenger.getPassportNumber() + " NAME:" + passenger.getFirstName().charAt(0) + "."
+                    + passenger.getLastName().toUpperCase() + " NUMLUGGAGE:" + passenger.getNumLuggage() + " CLASS:"
+                    + passenger.getCabinClass() + " Pieces added:" + "(" + passenger.getNumLuggage() + ")" + " $"
+                    + excessCost + "\n";
 
         assertEquals(expected, result);
 
@@ -119,9 +146,21 @@ public class FlightTest implements TestInterface{
         marksAwarded = marksAwarded + 1;
     }
 
+    @Test
+    public void sendDataToGenerator() throws FileNotFoundException, DocumentException {
+        DocumentBuilder generator = new PDFGenerator();
+
+        generator.addTestCases(testCasesList);
+        generator.addPassStatus(passStatusList);
+        generator.addFeedback(feedbackList);
+
+        System.out.println(testCasesList.size());
+
+        generator.createDocument();
+    }
+
     @Override
-    public int getMarks()
-    {
+    public int getMarks() {
         return marksAwarded;
     }
 }

@@ -2,6 +2,7 @@ package com.comp3607project;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -17,14 +18,38 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFGenerator implements DocumentBuilder {
 
+    private String[] testCases;
+    private String[] passStatus;
+    private String[] feedback;
+
+    private ArrayList<String> testCasesList;
+    private ArrayList<String> passStatusList;
+    private ArrayList<String> feedbackList;
+
     // main needs this
     PDFGenerator() {
+        testCasesList = new ArrayList<>();
+        passStatusList = new ArrayList<>();
+        feedbackList = new ArrayList<>();
+    }
 
+    public void addTestCases(ArrayList<String> testCases) {
+        testCasesList.addAll(testCases);
+    }
+
+    public void addPassStatus(ArrayList<String> passStatus) {
+        passStatusList.addAll(passStatus);
+    }
+
+    public void addFeedback(ArrayList<String> feedback) {
+        feedbackList.addAll(feedback);
     }
 
     public void createDocument() throws FileNotFoundException, DocumentException {
+        makePrimitiveArrays(testCasesList, passStatusList, feedbackList);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf")); // Still have to pass the
+                                                                                      // student's ID
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
@@ -34,7 +59,7 @@ public class PDFGenerator implements DocumentBuilder {
 
         PdfPTable table = new PdfPTable(new float[] { 4, 3, 10 });
         addTableHeader(table);
-        addRows(table);
+        addRows(table, testCases, passStatus, feedback);
 
         document.add(paragraph);
         document.add(table);
@@ -55,13 +80,13 @@ public class PDFGenerator implements DocumentBuilder {
                 });
     }
 
-    private void addRows(PdfPTable table) {
+    private void addRows(PdfPTable table, String[] testCases, String[] passStatus, String[] feedback) {
 
         // Filler content to be replaced later
-        for (int i = 0; i < 10; i++) {
-            table.addCell("Test Case " + i);
-            table.addCell("Passed");
-            table.addCell("No Feedback");
+        for (int i = 0; i < testCases.length; i++) {
+            table.addCell(testCases[i]);
+            table.addCell(passStatus[i]);
+            table.addCell(feedback[i]);
         }
 
         // Leaving this code for now just in case
@@ -80,6 +105,13 @@ public class PDFGenerator implements DocumentBuilder {
         // PdfPCell verticalAlignCell = new PdfPCell(new Phrase("row 2, col 3"));
         // verticalAlignCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         // table.addCell(verticalAlignCell);
+    }
+
+    private void makePrimitiveArrays(ArrayList<String> testCasesList, ArrayList<String> passStatusList,
+            ArrayList<String> feedbackList) {
+        testCases = testCasesList.toArray(new String[0]);
+        passStatus = passStatusList.toArray(new String[0]);
+        feedback = feedbackList.toArray(new String[0]);
     }
 
 }

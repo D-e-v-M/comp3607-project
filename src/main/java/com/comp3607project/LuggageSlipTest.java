@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
 
-public class LuggageSlipTest implements TestInterface{
+public class LuggageSlipTest implements TestInterface {
 
     private String passportNumber = "TA890789";
     private String firstName = "Joe";
@@ -20,50 +20,53 @@ public class LuggageSlipTest implements TestInterface{
     private LuggageSlip luggageslip2;
     private static int marksAwarded = 0;
 
-    @BeforeEach
-    public void testAttributeTypes() {
+    public LuggageSlipTest() {
         owner = new Passenger(passportNumber, firstName, lastName, flightNo);
         d = LocalDateTime.of(2023, 1, 23, 10, 0, 0);
-        f = new Flight(flightNo, "POS", "ANR",d);
+        f = new Flight(flightNo, "POS", "ANR", d);
         luggageslip = new LuggageSlip(owner, f);
         luggageslip2 = new LuggageSlip(owner, f, "$105");
     }
 
+    // @BeforeEach
+    // public void testAttributeTypes() {
+    // owner = new Passenger(passportNumber, firstName, lastName, flightNo);
+    // d = LocalDateTime.of(2023, 1, 23, 10, 0, 0);
+    // f = new Flight(flightNo, "POS", "ANR", d);
+    // luggageslip = new LuggageSlip(owner, f);
+    // luggageslip2 = new LuggageSlip(owner, f, "$105");
+    // }
 
     @Test
-    public void testOwnerAttribute()
-    {
+    public void testOwnerAttribute() {
         assertNotNull(luggageslip.getOwner());
         assertTrue(luggageslip.getOwner() instanceof Passenger);
         marksAwarded = marksAwarded + 1;
     }
 
     @Test
-    public void testluggageSlipIDCounterAttribute()
-    {
+    public void testluggageSlipIDCounterAttribute() {
         assertNotNull(luggageslip.getLuggageSlipIDCounter());
         assertTrue(luggageslip.getLuggageSlipIDCounter() >= 1);
         marksAwarded = marksAwarded + 1;
     }
 
     @Test
-    public void testLuggageSlipIDAttribute()
-    {
+    public void testLuggageSlipIDAttribute() {
         assertNotNull(luggageslip.getLuggageSlipID());
         assertTrue(luggageslip.getLuggageSlipID() instanceof String);
         marksAwarded = marksAwarded + 1;
     }
 
     @Test
-    public void testLabelAttribute()
-    {
+    public void testLabelAttribute() {
         assertNotNull(luggageslip2.getLabel());
         assertTrue(luggageslip.getLabel() instanceof String);
         marksAwarded = marksAwarded + 1;
     }
 
     @Test
-    public void testLuggageSlipCreation(){
+    public void testLuggageSlipCreation() {
         assertNotNull(luggageslip);
         assertEquals("", luggageslip.getLabel());
         assertEquals(owner, luggageslip.getOwner());
@@ -71,7 +74,7 @@ public class LuggageSlipTest implements TestInterface{
     }
 
     @Test
-    public void testOverloadLuggageSlipCreation(){
+    public void testOverloadLuggageSlipCreation() {
         assertNotNull(luggageslip2);
         assertEquals("$105", luggageslip2.getLabel());
         assertEquals(owner, luggageslip2.getOwner());
@@ -79,27 +82,25 @@ public class LuggageSlipTest implements TestInterface{
     }
 
     @Test
-    public void testHasOwner(){
+    public void testHasOwner() {
         assertEquals(luggageslip.getOwner().getPassportNumber(), "TA890789");
         marksAwarded = marksAwarded + 2;
     }
 
     @Test
-    public void testToString()
-    {   
+    public void testToString() {
         String text = "";
-        for(int i=1; i<=owner.getNumLuggage(); i++)
-        {
-            text += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + owner.getNumLuggage() + " CLASS: " + owner.getCabinClass() + " $105\n";
+        for (int i = 1; i <= owner.getNumLuggage(); i++) {
+            text += "BW600_Bean_" + i + " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + owner.getNumLuggage()
+                    + " CLASS: " + owner.getCabinClass() + " $105\n";
         }
         assertEquals(text, luggageslip2.toString());
         marksAwarded = marksAwarded + 2;
     }
 
     @Override
-    public int getMarks()
-    {
+    public int getMarks() {
         return marksAwarded;
     }
-    
+
 }

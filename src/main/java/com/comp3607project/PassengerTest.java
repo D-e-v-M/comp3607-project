@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-public class PassengerTest implements TestInterface{
+public class PassengerTest implements TestInterface {
 
     String passportNumber = "TA890789";
     String firstName = "Joe";
@@ -15,14 +15,18 @@ public class PassengerTest implements TestInterface{
 
     private Passenger passenger;
     private static int marksAwarded = 0;
-    
-    @BeforeEach
-    public void setUp() {
+
+    public PassengerTest() {
         passenger = new Passenger("TA890789", "Joe", "Bean", "BW600");
     }
 
+    // @BeforeEach
+    // public void setUp() {
+    // passenger = new Passenger("TA890789", "Joe", "Bean", "BW600");
+    // }
+
     @Test
-    public void testPassportNumberAttribute(){
+    public void testPassportNumberAttribute() {
         assertNotNull(passenger.getPassportNumber());
         assertTrue(passenger.getPassportNumber() instanceof String);
         marksAwarded = marksAwarded + 1;
@@ -58,13 +62,12 @@ public class PassengerTest implements TestInterface{
     @Test
     public void testCabinClassAttribute() {
         assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
-                   passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
+                passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
         marksAwarded = marksAwarded + 1;
     }
 
     @Test
-    public void testPassengerCreation()
-    {
+    public void testPassengerCreation() {
         assertEquals(passportNumber, passenger.getPassportNumber());
         assertEquals(firstName, passenger.getFirstName());
         assertEquals(lastName, passenger.getLastName());
@@ -81,20 +84,20 @@ public class PassengerTest implements TestInterface{
     @Test
     public void testAssignRandomCabinClass() {
         assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
-                   passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
+                passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
         marksAwarded = marksAwarded + 2;
     }
 
     @Test
     public void testToString() {
-        String expectedString = " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + passenger.getNumLuggage() + " CLASS: " + passenger.getCabinClass();
+        String expectedString = " PP NO. TA890789 NAME: J.BEAN NUMLUGGAGE: " + passenger.getNumLuggage() + " CLASS: "
+                + passenger.getCabinClass();
         assertEquals(expectedString, passenger.toString());
         marksAwarded = marksAwarded + 3;
     }
 
     @Override
-    public int getMarks()
-    {
+    public int getMarks() {
         return marksAwarded;
     }
 }
