@@ -2,10 +2,10 @@ package com.comp3607project;
 
 public class MarksAwarded {
 
-    PassengerTest passenger;
-    FlightTest flight;
-    LuggageSlipTest luggageSlip;
-    LuggageManifestTest luggageManifest;
+    TestInterface passenger;
+    TestInterface flight;
+    TestInterface LuggageSlipTest luggageSlip;
+    TestInterface LuggageManifestTest luggageManifest;
     int totalMarks = 0;
 
     public MarksAwarded() {
