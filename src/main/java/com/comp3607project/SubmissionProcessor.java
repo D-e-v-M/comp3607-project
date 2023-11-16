@@ -45,6 +45,7 @@ public class SubmissionProcessor {
                                 outputStream.write(inputStream.read());
                             }
                         }
+                        //add package headings
                         JavaPackageInserter.addPackageDeclaration(newFile);
                     }
                 }

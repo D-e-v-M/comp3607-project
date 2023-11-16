@@ -8,7 +8,7 @@ public class JavaPackageInserter {
         try (BufferedReader br = new BufferedReader(new FileReader(javaFile));
              RandomAccessFile randomAccessFile = new RandomAccessFile(javaFile, "rw")) {
     
-            StringBuilder fileContent = new StringBuilder(); // Store the entire file content
+            StringBuilder fileContent = new StringBuilder(); 
     
             String line;
 
@@ -18,13 +18,13 @@ public class JavaPackageInserter {
                 }
             }
     
-            // Prepend the desired package declaration to the file content
+            
             fileContent.insert(0, "package com.comp3607project;" + System.lineSeparator());
     
-            // Truncate the file content to the beginning
+            
             randomAccessFile.setLength(0);
     
-            // Write the modified file content to the file
+            
             randomAccessFile.writeBytes(fileContent.toString());
         } catch (IOException e) {
             e.printStackTrace();
