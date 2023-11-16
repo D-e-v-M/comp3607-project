@@ -19,7 +19,7 @@ public class SubmissionProcessor {
     }
 
     public void processSubmissions(List<File> submissions) throws IOException {
-        File destAddr = new File("comp3607-project\\src\\main\\java\\com\\comp3607project");
+        File destAddr = new File("src\\main\\java\\com\\comp3607project");
         List<File> files = new ArrayList<>();
 
         for (File file : submissions) {
@@ -45,13 +45,14 @@ public class SubmissionProcessor {
                                 outputStream.write(inputStream.read());
                             }
                         }
+                        JavaPackageInserter.addPackageDeclaration(newFile);
                     }
                 }
                 // run test on studentFiles, reference paths
                 //JUnitCore.runClasses(TestSuite.class); //run the test cases, don't need output 
                 
                 // delete studentFiles
-                FileDeleter.deleteFiles(files);
+                //FileDeleter.deleteFiles(files);
             } catch (IOException e) {
                 System.out.println("[SubmissionProcessor]: Error processing submissions.");
             }
