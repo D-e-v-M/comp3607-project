@@ -199,4 +199,8 @@ public class LuggageSlipTest implements TestInterface {
     return testCasesList;
   }
 
+  public static void clearList() {
+    testCasesList.clear();
+  }
+
 }

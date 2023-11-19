@@ -52,7 +52,8 @@ public class SubmissionProcessor {
 
                 // get name of current student zip file
                 String filename = studentSubmission.getName();
-                filename = filename.substring(46, 78);
+                filename = filename.substring(46);
+                filename = filename.replaceAll(".zip", "");
 
                 // run test on studentFiles, reference paths
                 TestSuite suite = new TestSuite();

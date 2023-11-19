@@ -208,4 +208,8 @@ public class PassengerTest implements TestInterface {
   public static ArrayList<TestCase> getTestCasesList() {
     return testCasesList;
   }
+
+  public static void clearList() {
+    testCasesList.clear();
+  }
 }

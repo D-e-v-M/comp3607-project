@@ -229,4 +229,8 @@ public class LuggageManifestTest implements TestInterface {
         return testCasesList;
     }
 
+    public static void clearList() {
+        testCasesList.clear();
+    }
+
 }

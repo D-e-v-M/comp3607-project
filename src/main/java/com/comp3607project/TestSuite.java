@@ -31,16 +31,27 @@ public class TestSuite {
         System.out.println(result.wasSuccessful());
 
         DocumentBuilder generator = new PDFGenerator();
-        ArrayList<TestCase> testCases = FlightTest.getTestCasesList();
+        ArrayList<TestCase> testCases = new ArrayList<>(); // Resets current list
+
+        // Adds all test cases to a list
+        testCases.addAll(FlightTest.getTestCasesList());
         testCases.addAll(LuggageManifestTest.getTestCasesList());
         testCases.addAll(LuggageSlipTest.getTestCasesList());
         testCases.addAll(PassengerTest.getTestCasesList());
+
+        // Adds test case data to generator
         generator.addTestCases(testCases);
         generator.createDocument(submissionName);
 
         for (TestCase t : testCases) {
             System.out.println(t.getName());
         }
+
+        // Clears all lists between submissions
+        FlightTest.clearList();
+        LuggageManifestTest.clearList();
+        LuggageSlipTest.clearList();
+        PassengerTest.clearList();
 
     }
 }
