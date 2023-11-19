@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.junit.runner.JUnitCore;
+import com.itextpdf.text.DocumentException;
 
 public class SubmissionProcessor {
     // This class unzips the student's submission folder and saves their code for
@@ -18,7 +18,7 @@ public class SubmissionProcessor {
     public SubmissionProcessor() {
     }
 
-    public void processSubmissions(List<File> submissions) throws IOException {
+    public void processSubmissions(List<File> submissions) throws IOException, DocumentException {
         File destAddr = new File("src\\main\\java\\com\\comp3607project");
         List<File> files = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class SubmissionProcessor {
                     newFile.getParentFile().mkdirs();
 
                     if (!zipEntry.isDirectory() && zipEntry.getName().endsWith(".java")) {
-                        
+
                         files.add(new File(destAddr, zipEntry.getName()));
 
                         // write all .java files to studentFiles folder
@@ -45,15 +45,21 @@ public class SubmissionProcessor {
                                 outputStream.write(inputStream.read());
                             }
                         }
-                        //add package headings
+                        // add package headings
                         JavaPackageInserter.addPackageDeclaration(newFile);
                     }
                 }
+
+                // get name of current student zip file
+                String filename = studentSubmission.getName();
+                filename = filename.substring(46, 78);
+
                 // run test on studentFiles, reference paths
-                //JUnitCore.runClasses(TestSuite.class); //run the test cases, don't need output 
-                
+                TestSuite suite = new TestSuite();
+                suite.runTests();
+
                 // delete studentFiles
-                //FileDeleter.deleteFiles(files);
+                FileDeleter.deleteFiles(files);
             } catch (IOException e) {
                 System.out.println("[SubmissionProcessor]: Error processing submissions.");
             }

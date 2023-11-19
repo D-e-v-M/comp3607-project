@@ -4,8 +4,8 @@ public class MarksAwarded {
 
     TestInterface passenger;
     TestInterface flight;
-    TestInterface LuggageSlipTest luggageSlip;
-    TestInterface LuggageManifestTest luggageManifest;
+    TestInterface luggageSlip;
+    TestInterface luggageManifest;
     int totalMarks = 0;
 
     public MarksAwarded() {

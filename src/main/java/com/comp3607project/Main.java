@@ -1,17 +1,15 @@
 package com.comp3607project;
 
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
+import com.itextpdf.text.DocumentException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DocumentException {
 
         ProjectManager projectManager = new ProjectManager();
 
         // Specify the path to the zipped file
-        String filePath = "comp3607-project\\data\\Submissions.zip";
+        String filePath = "data\\Submissions.zip";
 
         // Process student submissions
         projectManager.processStudentSubmissions(filePath);
@@ -20,7 +18,7 @@ public class Main {
         // Result result = JUnitCore.runClasses(TestSuite.class);
 
         // for (Failure failure : result.getFailures()) {
-        //     System.out.println(failure.toString());
+        // System.out.println(failure.toString());
         // }
 
         // System.out.println(result.wasSuccessful());

@@ -10,13 +10,12 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-
 public class Extractor {
-    //get all student zip files from main zip file
+    // get all student zip files from main zip file
 
     public Extractor() {
     }
-    
+
     public List<File> extractSecondaryZips(String primaryZipPath, String destinationDirectory) throws IOException {
         List<File> extractedZipFiles = new ArrayList<>();
 
@@ -30,7 +29,8 @@ public class Extractor {
                     newFile.getParentFile().mkdirs();
 
                     try (FileOutputStream outputStream = new FileOutputStream(newFile);
-                         BufferedInputStream inputStream = new BufferedInputStream(primaryZipFile.getInputStream(zipEntry))) {
+                            BufferedInputStream inputStream = new BufferedInputStream(
+                                    primaryZipFile.getInputStream(zipEntry))) {
                         while (inputStream.available() > 0) {
                             outputStream.write(inputStream.read());
                         }

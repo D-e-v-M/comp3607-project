@@ -18,27 +18,22 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFGenerator implements DocumentBuilder {
 
-    
-  
-
     private ArrayList<TestCase> testCasesList;
-    
 
     // main needs this
     PDFGenerator() {
         testCasesList = new ArrayList<>();
     }
-        
 
     public void addTestCases(ArrayList<TestCase> testCases) {
         testCasesList.addAll(testCases);
     }
 
     public void createDocument() throws FileNotFoundException, DocumentException {
-        //makePrimitiveArrays(testCasesList);
+        // makePrimitiveArrays(testCasesList);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf")); // Still have to pass the
-                                                                                      // student's ID
+        PdfWriter.getInstance(document, new FileOutputStream("data\\iTextHelloWorld.pdf")); // Still have to pass the
+        // student's ID
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
@@ -73,11 +68,11 @@ public class PDFGenerator implements DocumentBuilder {
         String status;
 
         // Filler content to be replaced later
-        for(TestCase t : testCases){
-            if(t.isPassed())
-                status="Passed";
+        for (TestCase t : testCases) {
+            if (t.isPassed())
+                status = "Passed";
             else
-                status="Failed";
+                status = "Failed";
             table.addCell(t.getName());
             table.addCell(status);
             table.addCell(t.getFeedback());
@@ -101,7 +96,5 @@ public class PDFGenerator implements DocumentBuilder {
         // verticalAlignCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         // table.addCell(verticalAlignCell);
     }
-
-   
 
 }

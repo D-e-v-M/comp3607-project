@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.itextpdf.text.DocumentException;
+
 public class ProjectManager {
 
     private Extractor extractor;
@@ -14,8 +16,8 @@ public class ProjectManager {
         this.processor = new SubmissionProcessor();
     }
 
-    public void processStudentSubmissions(String filePath) {
-        String destPath = "comp3607-project\\src\\main\\java\\com\\comp3607project\\submissions";
+    public void processStudentSubmissions(String filePath) throws DocumentException {
+        String destPath = "src\\main\\java\\com\\comp3607project\\submissions";
         try {
             List<File> secondaryZips = extractor.extractSecondaryZips(filePath, destPath);
             this.processor.processSubmissions(secondaryZips);
