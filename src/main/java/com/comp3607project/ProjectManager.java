@@ -19,7 +19,7 @@ public class ProjectManager {
     }
 
     public void processStudentSubmissions(String filePath) throws DocumentException {
-        String destPath = "src\\main\\java\\com\\comp3607project\\submissions";
+        String destPath = "submissions";
         try {
             List<File> secondaryZips = extractor.extractSecondaryZips(filePath, destPath);
             this.processor.processSubmissions(secondaryZips);

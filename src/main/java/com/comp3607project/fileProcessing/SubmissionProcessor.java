@@ -21,7 +21,7 @@ public class SubmissionProcessor {
     }
 
     public void processSubmissions(List<File> submissions) throws IOException, DocumentException {
-        File destAddr = new File("src\\main\\java\\com\\comp3607project");
+        File destAddr = new File("src\\main\\java\\com\\comp3607project\\tests");
         List<File> files = new ArrayList<>();
 
         for (File file : submissions) {

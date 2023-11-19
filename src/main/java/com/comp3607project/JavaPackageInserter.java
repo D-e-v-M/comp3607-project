@@ -19,7 +19,7 @@ public class JavaPackageInserter {
             }
     
             
-            fileContent.insert(0, "package com.comp3607project;" + System.lineSeparator());
+            fileContent.insert(0, "package com.comp3607project.tests;" + System.lineSeparator());
     
             
             randomAccessFile.setLength(0);
