@@ -19,7 +19,7 @@ import org.junit.runner.notification.Failure;
 public class TestSuite {
     // This class doesn't need any test methods.
 
-    public void runTests() throws FileNotFoundException, DocumentException {
+    public void runTests(String submissionName) throws FileNotFoundException, DocumentException {
         // Runs test cases on startup
 
         Result result = JUnitCore.runClasses(TestSuite.class);
@@ -36,7 +36,7 @@ public class TestSuite {
         testCases.addAll(LuggageSlipTest.getTestCasesList());
         testCases.addAll(PassengerTest.getTestCasesList());
         generator.addTestCases(testCases);
-        generator.createDocument();
+        generator.createDocument(submissionName);
 
         for (TestCase t : testCases) {
             System.out.println(t.getName());

@@ -29,10 +29,11 @@ public class PDFGenerator implements DocumentBuilder {
         testCasesList.addAll(testCases);
     }
 
-    public void createDocument() throws FileNotFoundException, DocumentException {
+    public void createDocument(String submissionName) throws FileNotFoundException, DocumentException {
         // makePrimitiveArrays(testCasesList);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("data\\iTextHelloWorld.pdf")); // Still have to pass the
+        PdfWriter.getInstance(document, new FileOutputStream("data\\" + submissionName + ".pdf")); // Still have to pass
+                                                                                                   // the
         // student's ID
 
         document.open();

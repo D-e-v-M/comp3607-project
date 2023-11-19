@@ -56,7 +56,7 @@ public class SubmissionProcessor {
 
                 // run test on studentFiles, reference paths
                 TestSuite suite = new TestSuite();
-                suite.runTests();
+                suite.runTests(filename);
 
                 // delete studentFiles
                 FileDeleter.deleteFiles(files);
