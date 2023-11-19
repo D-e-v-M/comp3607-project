@@ -32,9 +32,7 @@ public class PDFGenerator implements DocumentBuilder {
     public void createDocument(String submissionName) throws FileNotFoundException, DocumentException {
         // makePrimitiveArrays(testCasesList);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("data\\" + submissionName + ".pdf")); // Still have to pass
-                                                                                                   // the
-        // student's ID
+        PdfWriter.getInstance(document, new FileOutputStream("data\\" + submissionName + ".pdf")); 
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
