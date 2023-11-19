@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.comp3607project.fileProcessing.Extractor;
+import com.comp3607project.fileProcessing.SubmissionProcessor;
 import com.itextpdf.text.DocumentException;
 
 public class ProjectManager {

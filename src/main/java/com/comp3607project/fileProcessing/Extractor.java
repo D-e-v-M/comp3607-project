@@ -1,4 +1,4 @@
-package com.comp3607project;
+package com.comp3607project.fileProcessing;
 
 import java.io.BufferedInputStream;
 import java.io.File;

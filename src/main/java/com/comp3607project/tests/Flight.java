@@ -1,4 +1,4 @@
-package com.comp3607project;
+package com.comp3607project.tests;
 import java.time.LocalDateTime;
 public class Flight{
     

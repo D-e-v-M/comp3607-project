@@ -1,4 +1,4 @@
-package com.comp3607project;
+package com.comp3607project.tests;
 import java.util.ArrayList;
 public class LuggageManifest{
     

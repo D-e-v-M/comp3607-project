@@ -1,4 +1,4 @@
-package com.comp3607project;
+package com.comp3607project.tests;
 import java.util.Random;
 public class Passenger{
     

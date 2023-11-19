@@ -1,4 +1,5 @@
-package com.comp3607project;
+package com.comp3607project.tests;
+
 public class LuggageSlip{
     
     private Passenger owner;

@@ -7,6 +7,10 @@ import org.junit.platform.suite.api.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import com.comp3607project.tests.FlightTest;
+import com.comp3607project.tests.LuggageManifestTest;
+import com.comp3607project.tests.LuggageSlipTest;
+import com.comp3607project.tests.PassengerTest;
 import com.itextpdf.text.DocumentException;
 
 import org.junit.runner.JUnitCore;

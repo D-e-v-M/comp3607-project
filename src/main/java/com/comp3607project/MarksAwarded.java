@@ -1,5 +1,10 @@
 package com.comp3607project;
 
+import com.comp3607project.tests.FlightTest;
+import com.comp3607project.tests.LuggageManifestTest;
+import com.comp3607project.tests.LuggageSlipTest;
+import com.comp3607project.tests.PassengerTest;
+
 public class MarksAwarded {
 
     TestInterface passenger;

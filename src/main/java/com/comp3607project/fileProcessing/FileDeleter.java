@@ -1,4 +1,4 @@
-package com.comp3607project;
+package com.comp3607project.fileProcessing;
 
 import java.io.File;
 import java.util.List;

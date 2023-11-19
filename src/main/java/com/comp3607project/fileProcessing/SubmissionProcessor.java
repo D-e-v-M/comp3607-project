@@ -1,4 +1,4 @@
-package com.comp3607project;
+package com.comp3607project.fileProcessing;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import com.comp3607project.JavaPackageInserter;
+import com.comp3607project.TestSuite;
 import com.itextpdf.text.DocumentException;
 
 public class SubmissionProcessor {
