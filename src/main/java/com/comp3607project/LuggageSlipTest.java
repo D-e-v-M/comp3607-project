@@ -7,10 +7,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.junit.Test;
 
-import com.comp3607project.dummyFiles.Flight;
-import com.comp3607project.dummyFiles.LuggageSlip;
-import com.comp3607project.dummyFiles.Passenger;
-
 public class LuggageSlipTest implements TestInterface {
 
   private String passportNumber = "TA890789";
@@ -62,6 +58,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testOwnerAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "Owner Attribute " + 0 + "\n";
 
     }
 
@@ -81,6 +78,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testluggageSlipIDCounterAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "luggageSlipIDCounter Attribute " + 0 + "\n";
 
     }
 
@@ -100,6 +98,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testLuggageSlipIDAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "LuggageSlipID Attribute " + 0 + "\n";
 
     }
 
@@ -118,6 +117,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase(" testLabelAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "Label Attribute " + 0 + "\n";
 
     }
 
@@ -137,6 +137,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testLuggageSlipCreation", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "LuggageSlip Method " + 0 + "\n";
 
     }
 
@@ -157,7 +158,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testOverloadLuggageSlipCreation", false, e.getMessage());
       testCasesList.add(testCase);
-
+      resultsOutput += "OverloadLuggageSlip Method " + 0 + "\n";
     }
 
   }
@@ -174,6 +175,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testHasOwner", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "HasOwner Method " + 0 + "\n";
 
     }
 
@@ -196,6 +198,7 @@ public class LuggageSlipTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testToString", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "ToString Method " + 0 + "\n";
 
     }
 
@@ -204,6 +207,7 @@ public class LuggageSlipTest implements TestInterface {
     @Override
     public String getOverallOutput() {
         resultsOutput += "LuggageSlip Class Score: " + marksAwarded + " /14 \n";
+        resultsOutput += "-------------------------------------------------\n";
         return resultsOutput;
     }
 
