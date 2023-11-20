@@ -6,9 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import com.comp3607project.dummyFiles.Flight;
-import com.comp3607project.dummyFiles.LuggageManifest;
-import com.comp3607project.dummyFiles.Passenger;
 import com.itextpdf.text.DocumentException;
 
 import java.io.FileNotFoundException;
@@ -53,6 +50,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testFlightNoAttribute", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "FlightNo Attribute " + 0 + "\n";
         }
 
     }
@@ -73,7 +71,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testDestinationNoAttribute", false, e.getMessage());
             testCasesList.add(testCase);
-
+            resultsOutput += "Destination Attribute " + 0 + "\n";
         }
 
     }
@@ -94,6 +92,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testOriginAttribute", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "Origin Attribute " + 0 + "\n";
 
         }
 
@@ -115,6 +114,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testFlightDatettribute", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "FlightDate Attribute " + 0 + "\n";
 
         }
 
@@ -136,6 +136,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testManifestAttribute", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "Manifest Attribute " + 0 + "\n";
 
         }
 
@@ -157,7 +158,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testFlightCreation", false, e.getMessage());
             testCasesList.add(testCase);
-
+            resultsOutput += "Flight Method " + 0 + "\n";
         }
 
     }
@@ -201,6 +202,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testCheckInLuggage", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "CheckInLuggage Method " + 0 + "\n";
 
         }
 
@@ -219,6 +221,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testPrintLuggageManifest", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "PrintLuggageManifest Method " + 0 + "\n";
 
         }
 
@@ -239,6 +242,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testGetAllowedLuggage", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "GetAllowedLuggage Method " + 0 + "\n";
 
         }
 
@@ -258,6 +262,7 @@ public class FlightTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testToString", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "ToString Method " + 0 + "\n";
 
         }
 
@@ -266,6 +271,7 @@ public class FlightTest implements TestInterface {
     @Override
     public String getOverallOutput() {
         resultsOutput += "Flight Class Score: " + marksAwarded + " /16 \n";
+        resultsOutput += "-------------------------------------------------\n";
         return resultsOutput;
     }
 
