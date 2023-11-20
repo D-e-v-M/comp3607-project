@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-//import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
-
-import com.comp3607project.dummyFiles.Flight;
-import com.comp3607project.dummyFiles.LuggageManifest;
-import com.comp3607project.dummyFiles.Passenger;
 
 public class LuggageManifestTest implements TestInterface {
     private Passenger p;
@@ -53,6 +48,7 @@ public class LuggageManifestTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testLuggageSlipIDAttribute", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "LuggageSlipID Attribute " + 0 + "\n";
 
         }
 
@@ -72,6 +68,7 @@ public class LuggageManifestTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testLuggageManifestCreation", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "LuggageManifest Method " + 0 + "\n";
 
         }
 
@@ -109,6 +106,7 @@ public class LuggageManifestTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testAddLuggage", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "AddLuggage Method " + 0 + "\n";
 
         }
 
@@ -156,6 +154,7 @@ public class LuggageManifestTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testGetExcessLuggageCost", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "GetExcessLuggageCost Method " + 0 + "\n";
 
         }
 
@@ -191,6 +190,7 @@ public class LuggageManifestTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testGetExcessLuggageCostByPassenger", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "GetExcessLuggageCostByPassenger Method " + 0 + "\n";
 
         }
 
@@ -226,6 +226,7 @@ public class LuggageManifestTest implements TestInterface {
         } catch (AssertionError e) {
             TestCase testCase = new TestCase("testToString", false, e.getMessage());
             testCasesList.add(testCase);
+            resultsOutput += "ToString Method " + 0 + "\n";
 
         }
 
@@ -234,6 +235,7 @@ public class LuggageManifestTest implements TestInterface {
     @Override
     public String getOverallOutput() {
         resultsOutput += "LuggageManifest Class Score: " + marksAwarded + " /20 \n";
+        resultsOutput += "-------------------------------------------------\n";
         return resultsOutput;
     }
 
