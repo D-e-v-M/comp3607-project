@@ -5,6 +5,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import com.comp3607project.dummyFiles.Flight;
+import com.comp3607project.dummyFiles.LuggageManifest;
+import com.comp3607project.dummyFiles.Passenger;
 import com.itextpdf.text.DocumentException;
 
 import java.io.FileNotFoundException;
@@ -15,6 +19,7 @@ public class FlightTest implements TestInterface {
     private Flight flight;
     LocalDateTime creationDate;
     private static int marksAwarded = 0;
+    private static String resultsOutput = "\n";
 
     private static ArrayList<TestCase> testCasesList;
 
@@ -41,6 +46,7 @@ public class FlightTest implements TestInterface {
             assertNotNull(flightNo);
             assertTrue(flightNo instanceof String);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "FlightNo Attribute " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testFlightNoAttribute", true, "");
             testCasesList.add(testCase);
@@ -60,6 +66,7 @@ public class FlightTest implements TestInterface {
             assertNotNull(destination);
             assertTrue(destination instanceof String);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "Destination Attribute " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testDestinationNoAttribute", true, "");
             testCasesList.add(testCase);
@@ -80,6 +87,7 @@ public class FlightTest implements TestInterface {
             assertNotNull(origin);
             assertTrue(origin instanceof String);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "Origin Attribute " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testOriginAttribute", true, "");
             testCasesList.add(testCase);
@@ -100,6 +108,7 @@ public class FlightTest implements TestInterface {
             assertNotNull(flightDate);
             assertTrue(flightDate instanceof LocalDateTime);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "FlightDate Attribute " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testFlightDateAttribute", true, "");
             testCasesList.add(testCase);
@@ -120,6 +129,7 @@ public class FlightTest implements TestInterface {
             assertNotNull(manifest);
             assertTrue(manifest instanceof LuggageManifest);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "Manifest Attribute " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testManifestAttribute", true, "");
             testCasesList.add(testCase);
@@ -140,6 +150,7 @@ public class FlightTest implements TestInterface {
             assertEquals("Los Angeles", flight.getOrigin());
             assertEquals(creationDate, flight.getFlightDate());
             marksAwarded = marksAwarded + 2;
+            resultsOutput += "Flight Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testFlightCreation", true, "");
             testCasesList.add(testCase);
@@ -183,6 +194,7 @@ public class FlightTest implements TestInterface {
             result = flight.checkInLuggage(invalidPassenger);
             assertEquals("Invalid flight", result);
             marksAwarded = marksAwarded + 5;
+            resultsOutput += "CheckInLuggage Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testCheckInLuggage", true, "");
             testCasesList.add(testCase);
@@ -201,6 +213,7 @@ public class FlightTest implements TestInterface {
             String manifestString = flight.printLuggageManifest();
             assertNotNull(manifestString);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "PrintLuggageManifest Method " + marksAwarded + "\n";
             TestCase testCase = new TestCase("testPrintLuggageManifest", true, "");
             testCasesList.add(testCase);
         } catch (AssertionError e) {
@@ -220,6 +233,7 @@ public class FlightTest implements TestInterface {
             assertEquals(1, flight.getAllowedLuggage('P'));
             assertEquals(0, flight.getAllowedLuggage('E'));
             marksAwarded = marksAwarded + 2;
+            resultsOutput += "GetAllowedLuggage Method " + marksAwarded + "\n";
             TestCase testCase = new TestCase("testGetAllowedLuggage", true, "");
             testCasesList.add(testCase);
         } catch (AssertionError e) {
@@ -238,6 +252,7 @@ public class FlightTest implements TestInterface {
             String flightString = flight.toString();
             assertNotNull(flightString);
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "ToString Method " + marksAwarded + "\n";
             TestCase testCase = new TestCase("testToString", true, "");
             testCasesList.add(testCase);
         } catch (AssertionError e) {
@@ -249,9 +264,17 @@ public class FlightTest implements TestInterface {
     }
 
     @Override
-    public int getMarks() {
+    public String getOverallOutput() {
+        resultsOutput += "Flight Class Score: " + marksAwarded + " /16 \n";
+        return resultsOutput;
+    }
+
+    @Override
+    public int getMarks()
+    {
         return marksAwarded;
     }
+
 
     public static ArrayList<TestCase> getTestCasesList() {
         return testCasesList;
