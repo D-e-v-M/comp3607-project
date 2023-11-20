@@ -9,11 +9,16 @@ import java.util.ArrayList;
 //import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
+import com.comp3607project.dummyFiles.Flight;
+import com.comp3607project.dummyFiles.LuggageManifest;
+import com.comp3607project.dummyFiles.Passenger;
+
 public class LuggageManifestTest implements TestInterface {
     private Passenger p;
     private Flight f;
     private LocalDateTime d;
     private static int marksAwarded = 0;
+    private static String resultsOutput = "\n";
 
     private static ArrayList<TestCase> testCasesList;
 
@@ -41,6 +46,7 @@ public class LuggageManifestTest implements TestInterface {
 
             assertTrue(LM.getSlips() instanceof ArrayList);
             marksAwarded = marksAwarded + 2;
+            resultsOutput += "LuggageSlipID Attribute " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testLuggageSlipIDAttribute", true, "");
             testCasesList.add(testCase);
@@ -59,6 +65,7 @@ public class LuggageManifestTest implements TestInterface {
 
             assertNotNull(LM.getSlips());
             marksAwarded = marksAwarded + 1;
+            resultsOutput += "LuggageManifest Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testLuggageManifestCreation", true, "");
             testCasesList.add(testCase);
@@ -95,6 +102,7 @@ public class LuggageManifestTest implements TestInterface {
 
             assertEquals(expected, actual);
             marksAwarded = marksAwarded + 6;
+            resultsOutput += "AddLuggage Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testAddLuggage", true, "");
             testCasesList.add(testCase);
@@ -141,6 +149,7 @@ public class LuggageManifestTest implements TestInterface {
 
             assertEquals(expected, actual, 0.01);
             marksAwarded = marksAwarded + 3;
+            resultsOutput += "GetExcessLuggageCost Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testGetExcessLuggageCost", true, "");
             testCasesList.add(testCase);
@@ -175,6 +184,7 @@ public class LuggageManifestTest implements TestInterface {
 
             assertEquals(expected, actual);
             marksAwarded = marksAwarded + 5;
+            resultsOutput += "GetExcessLuggageCostByPassenger Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testGetExcessLuggageCostByPassenger", true, "");
             testCasesList.add(testCase);
@@ -209,6 +219,7 @@ public class LuggageManifestTest implements TestInterface {
 
             assertEquals(expected, actual);
             marksAwarded = marksAwarded + 3;
+            resultsOutput += "ToString Method " + marksAwarded + "\n";
 
             TestCase testCase = new TestCase("testToString", true, "");
             testCasesList.add(testCase);
@@ -221,7 +232,14 @@ public class LuggageManifestTest implements TestInterface {
     }
 
     @Override
-    public int getMarks() {
+    public String getOverallOutput() {
+        resultsOutput += "LuggageManifest Class Score: " + marksAwarded + " /20 \n";
+        return resultsOutput;
+    }
+
+    @Override
+    public int getMarks()
+    {
         return marksAwarded;
     }
 
