@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.comp3607project.dummyFiles.Passenger;
 import org.junit.Test;
 
 public class PassengerTest implements TestInterface {
@@ -18,6 +18,7 @@ public class PassengerTest implements TestInterface {
 
   private Passenger passenger;
   private static int marksAwarded = 0;
+  private static String resultsOutput = "\n";
 
   private static ArrayList<TestCase> testCasesList;
 
@@ -40,6 +41,7 @@ public class PassengerTest implements TestInterface {
       assertNotNull(passenger.getPassportNumber());
       assertTrue(passenger.getPassportNumber() instanceof String);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "PassportNumber Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testPassportNumberAttribute", true, "");
       testCasesList.add(testCase);
@@ -59,6 +61,7 @@ public class PassengerTest implements TestInterface {
       assertTrue(passenger.getFlightNo() instanceof String);
 
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "FlightNo Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testFlightNoAttribute", true, "");
       testCasesList.add(testCase);
@@ -76,6 +79,7 @@ public class PassengerTest implements TestInterface {
       assertNotNull(passenger.getFirstName());
       assertTrue(passenger.getFirstName() instanceof String);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "FirstName Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase(" testFirstNameAttribute", true, "");
       testCasesList.add(testCase);
@@ -94,6 +98,7 @@ public class PassengerTest implements TestInterface {
       assertNotNull(passenger.getLastName());
       assertTrue(passenger.getLastName() instanceof String);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "LastName Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testLastNameAttribute", true, "");
       testCasesList.add(testCase);
@@ -111,6 +116,7 @@ public class PassengerTest implements TestInterface {
     try {
       assertTrue(passenger.getNumLuggage() >= 0 && passenger.getNumLuggage() <= 5);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "NumLuggage Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testNumLuggageAttribute", true, "");
       testCasesList.add(testCase);
@@ -128,6 +134,7 @@ public class PassengerTest implements TestInterface {
       assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
           passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "CabinClass Attribute " + marksAwarded + "\n";
       TestCase testCase = new TestCase("testCabinClassAttribute", true, "");
       testCasesList.add(testCase);
     } catch (AssertionError e) {
@@ -153,6 +160,7 @@ public class PassengerTest implements TestInterface {
 
       assertNotNull(passenger.getCabinClass());
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "PassengerCreation Method " + marksAwarded + "\n";
       TestCase testCase = new TestCase("testPassengerCreation", true, "");
       testCasesList.add(testCase);
     } catch (AssertionError e) {
@@ -170,6 +178,7 @@ public class PassengerTest implements TestInterface {
       assertTrue(passenger.getCabinClass() == 'F' || passenger.getCabinClass() == 'B' ||
           passenger.getCabinClass() == 'P' || passenger.getCabinClass() == 'E');
       marksAwarded = marksAwarded + 2;
+      resultsOutput += "AssignRandomCabinClass Method " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testAssignRandomCabinClass", true, "");
       testCasesList.add(testCase);
@@ -188,6 +197,7 @@ public class PassengerTest implements TestInterface {
           + passenger.getCabinClass();
       assertEquals(expectedString, passenger.toString());
       marksAwarded = marksAwarded + 3;
+      resultsOutput += "ToString Method " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testToString", true, "");
       testCasesList.add(testCase);
@@ -200,10 +210,17 @@ public class PassengerTest implements TestInterface {
 
   }
 
-  @Override
-  public int getMarks() {
-    return marksAwarded;
-  }
+    @Override
+    public String getOverallOutput() {
+        resultsOutput += "Passenger Class Score: " + marksAwarded + " /16 \n";
+        return resultsOutput;
+    }
+
+    @Override
+    public int getMarks()
+    {
+        return marksAwarded;
+    }
 
   public static ArrayList<TestCase> getTestCasesList() {
     return testCasesList;
