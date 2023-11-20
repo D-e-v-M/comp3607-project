@@ -5,8 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-
-import com.comp3607project.dummyFiles.Passenger;
 import org.junit.Test;
 
 public class PassengerTest implements TestInterface {
@@ -48,6 +46,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testPassportNumberAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "PassportNumber Attribute " + 0 + "\n";
 
     }
 
@@ -68,6 +67,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testFlightNoAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "FlightNo Attribute " + 0 + "\n";
     }
 
   }
@@ -86,6 +86,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase(" testFirstNameAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "FirstName Attribute " + 0 + "\n";
 
     }
 
@@ -105,6 +106,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testLastNameAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "LastName Attribute " + 0 + "\n";
 
     }
 
@@ -123,6 +125,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testNumLuggageAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "NumLuggage Attribute " + 0 + "\n";
 
     }
 
@@ -140,6 +143,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testCabinClassAttribute", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "CabinClass Attribute " + 0 + "\n";
 
     }
 
@@ -166,6 +170,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testPassengerCreation", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "PassengerCreation Method " + 0 + "\n";
 
     }
 
@@ -185,6 +190,7 @@ public class PassengerTest implements TestInterface {
     } catch (AssertionError e) {
       TestCase testCase = new TestCase("testAssignRandomCabinClass", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "AssignRandomCabinClass Method " + 0 + "\n";
 
     }
 
@@ -205,6 +211,7 @@ public class PassengerTest implements TestInterface {
     } catch (Exception e) {
       TestCase testCase = new TestCase("testToString", false, e.getMessage());
       testCasesList.add(testCase);
+      resultsOutput += "ToString Method " + 0 + "\n";
 
     }
 
@@ -213,6 +220,7 @@ public class PassengerTest implements TestInterface {
     @Override
     public String getOverallOutput() {
         resultsOutput += "Passenger Class Score: " + marksAwarded + " /16 \n";
+        resultsOutput += "-------------------------------------------------\n";
         return resultsOutput;
     }
 
