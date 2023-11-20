@@ -43,9 +43,8 @@ public class TestSuite {
         generator.addTestCases(testCases);
         generator.createDocument(submissionName);
 
-        for (TestCase t : testCases) {
-            System.out.println(t.getName());
-        }
+        MarksAwarded overallScore = new MarksAwarded();
+        System.out.println(overallScore.TotalStudentScore());
 
         // Clears all lists between submissions
         FlightTest.clearList();
