@@ -5,9 +5,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-//import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
+
+import com.comp3607project.dummyFiles.Flight;
+import com.comp3607project.dummyFiles.LuggageSlip;
+import com.comp3607project.dummyFiles.Passenger;
 
 public class LuggageSlipTest implements TestInterface {
 
@@ -21,6 +23,7 @@ public class LuggageSlipTest implements TestInterface {
   private LuggageSlip luggageslip;
   private LuggageSlip luggageslip2;
   private static int marksAwarded = 0;
+  private static String resultsOutput = "\n";
 
   private static ArrayList<TestCase> testCasesList;
 
@@ -52,6 +55,7 @@ public class LuggageSlipTest implements TestInterface {
       assertNotNull(luggageslip.getOwner());
       assertTrue(luggageslip.getOwner() instanceof Passenger);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "Owner Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testOwnerAttribute", true, "");
       testCasesList.add(testCase);
@@ -70,6 +74,7 @@ public class LuggageSlipTest implements TestInterface {
       assertNotNull(luggageslip.getLuggageSlipIDCounter());
       assertTrue(luggageslip.getLuggageSlipIDCounter() >= 1);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "luggageSlipIDCounter Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testluggageSlipIDCounterAttribute", true, "");
       testCasesList.add(testCase);
@@ -88,6 +93,7 @@ public class LuggageSlipTest implements TestInterface {
       assertNotNull(luggageslip.getLuggageSlipID());
       assertTrue(luggageslip.getLuggageSlipID() instanceof String);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "LuggageSlipID Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testLuggageSlipIDAttribute", true, "");
       testCasesList.add(testCase);
@@ -105,6 +111,7 @@ public class LuggageSlipTest implements TestInterface {
       assertNotNull(luggageslip2.getLabel());
       assertTrue(luggageslip.getLabel() instanceof String);
       marksAwarded = marksAwarded + 1;
+      resultsOutput += "Label Attribute " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase(" testLabelAttribute", true, "");
       testCasesList.add(testCase);
@@ -123,6 +130,7 @@ public class LuggageSlipTest implements TestInterface {
       assertEquals("", luggageslip.getLabel());
       assertEquals(owner, luggageslip.getOwner());
       marksAwarded = marksAwarded + 3;
+      resultsOutput += "LuggageSlip Method " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testLuggageSlipCreation", true, "");
       testCasesList.add(testCase);
@@ -142,6 +150,7 @@ public class LuggageSlipTest implements TestInterface {
       assertEquals("$105", luggageslip2.getLabel());
       assertEquals(owner, luggageslip2.getOwner());
       marksAwarded = marksAwarded + 3;
+      resultsOutput += "OverloadLuggageSlip Method " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testOverloadLuggageSlipCreation", true, "");
       testCasesList.add(testCase);
@@ -158,6 +167,7 @@ public class LuggageSlipTest implements TestInterface {
     try {
       assertEquals(luggageslip.getOwner().getPassportNumber(), "TA890789");
       marksAwarded = marksAwarded + 2;
+      resultsOutput += "HasOwner Method " + marksAwarded + "\n";
 
       TestCase testCase = new TestCase("testHasOwner", true, "");
       testCasesList.add(testCase);
@@ -180,6 +190,7 @@ public class LuggageSlipTest implements TestInterface {
       }
       assertEquals(text, luggageslip2.toString());
       marksAwarded = marksAwarded + 2;
+      resultsOutput += "ToString Method " + marksAwarded + "\n";
       TestCase testCase = new TestCase("testToString", true, "");
       testCasesList.add(testCase);
     } catch (AssertionError e) {
@@ -190,10 +201,17 @@ public class LuggageSlipTest implements TestInterface {
 
   }
 
-  @Override
-  public int getMarks() {
-    return marksAwarded;
-  }
+    @Override
+    public String getOverallOutput() {
+        resultsOutput += "LuggageSlip Class Score: " + marksAwarded + " /14 \n";
+        return resultsOutput;
+    }
+
+    @Override
+    public int getMarks()
+    {
+        return marksAwarded;
+    }
 
   public static ArrayList<TestCase> getTestCasesList() {
     return testCasesList;
