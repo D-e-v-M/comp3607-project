@@ -25,10 +25,10 @@ public class TestSuite {
         Result result = JUnitCore.runClasses(TestSuite.class);
 
         for (Failure failure : result.getFailures()) {
-            System.out.println(failure.toString());
+            System.out.println("[TestSuite]: fail" +failure.toString());
         }
 
-        System.out.println(result.wasSuccessful());
+        // System.out.println("[TestSuite]: success: " +result.wasSuccessful());
 
         DocumentBuilder generator = new PDFGenerator();
         ArrayList<TestCase> testCases = new ArrayList<>(); // Resets current list
@@ -43,15 +43,16 @@ public class TestSuite {
         generator.addTestCases(testCases);
         generator.createDocument(submissionName);
 
-        for (TestCase t : testCases) {
-            System.out.println(t.getName());
-        }
+        // for (TestCase t : testCases) {
+        //     System.out.println(t.getName());
+        // }
 
         // Clears all lists between submissions
         FlightTest.clearList();
         LuggageManifestTest.clearList();
         LuggageSlipTest.clearList();
         PassengerTest.clearList();
+        testCases.clear();
 
     }
 }

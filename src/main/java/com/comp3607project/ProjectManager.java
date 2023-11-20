@@ -9,11 +9,11 @@ import com.itextpdf.text.DocumentException;
 public class ProjectManager {
 
     private Extractor extractor;
-    private SubmissionProcessor processor;
+    private SubmissionProcessor2 processor;
 
     public ProjectManager() {
         this.extractor = new Extractor();
-        this.processor = new SubmissionProcessor();
+        this.processor = new SubmissionProcessor2();
     }
 
     public void processStudentSubmissions(String filePath) throws DocumentException {
